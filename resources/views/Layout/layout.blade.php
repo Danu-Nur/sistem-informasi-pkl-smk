@@ -1,91 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100" lang="en">
 
 <head>
-    <title>Laravel - ItSolutionStuff.com</title>
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> --}}
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-        @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    {{-- <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png"> --}}
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-        body {
-            margin: 0;
-            font-size: .9rem;
-            font-weight: 400;
-            line-height: 1.6;
-            color: #212529;
-            text-align: left;
-            background-color: #f5f8fa;
-        }
-
-        .navbar-laravel {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
-        }
-
-        .navbar-brand,
-        .nav-link,
-        .my-form,
-        .login-form {
-            font-family: Raleway, sans-serif;
-        }
-
-        .my-form {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-        }
-
-        .my-form .row {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        .login-form {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-        }
-
-        .login-form .row {
-            margin-left: 0;
-            margin-right: 0;
-        }
-    </style>
 </head>
 
-<body>
+<body class="h-100">
 
-    <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="#">Laravel</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3"
+                    stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                        </li>
-                    @endguest
-                </ul>
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    @yield('content')
 
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 
 
-    @yield('content')
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="{{ asset('assets/plugins/common/common.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/settings.js') }}"></script>
+    <script src="{{ asset('assets/js/gleek.js') }}"></script>
+    <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
 </body>
 
 </html>
