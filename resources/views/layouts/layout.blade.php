@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('Admin.layouts.head')
+    @include('layouts.head')
 
 </head>
 
@@ -31,7 +31,7 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        @include('Admin.layouts.nav')
+        @include('layouts.nav')
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -39,15 +39,15 @@
         <!--**********************************
             Header start
         ***********************************-->
-        @include('Admin.layouts.header')
+        @include('layouts.header')
         <!--**********************************
-            Header end ti-comment-alt
+            Header end
         ***********************************-->
 
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('Admin.layouts.side')
+        @include('layouts.side')
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -64,7 +64,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        @include('Admin.layouts.foot')
+        @include('layouts.foot')
         <!--**********************************
             Footer end
         ***********************************-->
@@ -76,7 +76,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    @include('Admin.layouts.script')
+    @include('layouts.script')
 
 </body>
 

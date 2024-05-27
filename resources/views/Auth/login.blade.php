@@ -1,4 +1,4 @@
-@extends('Layout.layout')
+@extends('Auth.Layout.layout')
 
 @section('content')
     <div class="form-input-content">
