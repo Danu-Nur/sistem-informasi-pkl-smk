@@ -18,7 +18,6 @@ class JadwalTable extends Migration
             $table->foreignId('pkl_id')->nullable()->constrained('tb_pkl')->onDelete('set null');
             $table->date('tanggal')->nullable();
             $table->time('jam')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -24,7 +24,6 @@ class SiswaTable extends Migration
             $table->string('jurusan')->nullable();
             $table->string('username')->nullable();
             $table->string('password')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

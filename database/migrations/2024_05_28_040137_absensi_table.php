@@ -23,7 +23,6 @@ class AbsensiTable extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->text('lokasi_absen')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

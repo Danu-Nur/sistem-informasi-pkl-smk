@@ -20,7 +20,6 @@ class KegiatanTable extends Migration
             $table->foreignId('jadwal_id')->nullable()->constrained('tb_jadwal')->onDelete('set null');
             $table->string('dokumentasi')->nullable();
             $table->text('keterangan')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

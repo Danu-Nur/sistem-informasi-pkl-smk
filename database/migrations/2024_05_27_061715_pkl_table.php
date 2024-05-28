@@ -21,7 +21,6 @@ class PklTable extends Migration
             $table->foreignId('siswa_id')->nullable()->constrained('tb_siswa')->onDelete('set null');
             $table->foreignId('psekolah_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('pindustri_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
