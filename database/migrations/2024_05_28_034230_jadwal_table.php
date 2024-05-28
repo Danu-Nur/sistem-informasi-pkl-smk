@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class JadwalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tb_jadwal', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['SUPER','ADMIN', 'PEMBIMBING SEKOLAH', 'PEMBIMBING INDUSTRI'])->default('ADMIN');
+            $table->foreignId('pkl_id')->nullable()->constrained('tb_pkl')->onDelete('set null');
+            $table->date('tanggal')->nullable();
+            $table->time('jam')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tb_jadwal');
     }
 }

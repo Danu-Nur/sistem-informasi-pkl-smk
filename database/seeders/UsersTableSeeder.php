@@ -16,17 +16,16 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'name' => 'Super User',
+            'email' => 'super@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'SUPER',
+        ]);
+        User::create([
             'name' => 'Admin User',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
-
-        User::create([
-            'name' => 'Normal User',
-            'email' => 'user@gmail.com',
-            'password' => Hash::make('password'),
-            'role' => 'user',
+            'role' => 'ADMIN',
         ]);
     }
 }
