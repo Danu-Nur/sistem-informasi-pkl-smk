@@ -28,7 +28,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('siswa', [SiswaController::class, 'index'])->name('siswa');
+    Route::resource('siswa', SiswaController::class);
 });
 
 Route::middleware('user')->group(function () {
