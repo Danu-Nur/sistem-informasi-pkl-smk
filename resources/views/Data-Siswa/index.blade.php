@@ -60,9 +60,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Table</h4>
-                <button type="button" class="btn mb-1 btn-outline-primary" data-toggle="modal" data-target="#modalTambahData">
+                <a href="{{ route('admin.siswa.create') }}" class="btn mb-1 btn-outline-primary">
                     Tambah Data <span class="btn-icon-right"><i class="fa fa-plus"></i></span>
-                </button>
+                </a>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration">
                         <thead>
@@ -79,17 +79,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                            </tr>
+                            @foreach ($data_siswa as $siswa)
+                                <tr>
+                                    <td>{{ $siswa->nama_siswa }}</td>
+                                    <td>{{ $siswa->nomor_induk }}</td>
+                                    <td>{{ $siswa->alamat }}</td>
+                                    <td>{{ $siswa->email }}</td>
+                                    <td>{{ $siswa->telp }}</td>
+                                    <td>{{ $siswa->kelas }}</td>
+                                    <td>{{ $siswa->jurusan }}</td>
+                                    <td>{{ $siswa->username }}</td>
+                                    <td>{{ $siswa->password }}</td>
+                                </tr>
+                            @endforeach
+
 
 
                         </tbody>
@@ -102,7 +105,7 @@
     {{-- modal tambah data --}}
 
     <!-- Modal -->
-    <div class="modal fade" id="modalTambahData">
+    {{-- <div class="modal fade" id="modalTambahData">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -112,15 +115,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="basic-form">
-                        'nama_siswa',
-                        'nomor_induk',
-                        'alamat',
-                        'email',
-                        'telp',
-                        'kelas',
-                        'jurusan',
-                        'username',
-                        'password',
+
 
                         <form>
                             @csrf
@@ -170,5 +165,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
