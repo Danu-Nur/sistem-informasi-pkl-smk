@@ -4,6 +4,10 @@
 <script src="{{ asset('assets/js/gleek.js') }}"></script>
 <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
 
+<!-- DataTables -->
+<script src="{{ asset('assets/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
 <!-- Chartjs -->
 <script src="{{ asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
 <!-- Circle progress -->
@@ -22,3 +26,5 @@
 <script src="{{ asset('assets/plugins/chartist/js/chartist.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}"></script>
 <script src="{{ asset('assets/js/dashboard/dashboard-1.js') }}"></script>
+<!-- Toast Tr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -177,7 +177,9 @@
                                 <li>
                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                 </li>
-                                <li><a href="{{ route('logout') }}"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                <li>
+                                    <a href="{{ route('logout') }}"><i class="icon-key"></i> <span>Logout</span></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
