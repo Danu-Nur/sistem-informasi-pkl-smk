@@ -75,9 +75,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Siswa_Models $siswa)
     {
-        //
+        return view('Data-Siswa.edit', compact('siswa'));
     }
 
     /**
@@ -87,9 +87,33 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Siswa_Models $siswa)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_siswa' => 'required|string|max:255',
+            'nomor_induk' => 'required|string|max:255|unique:tb_siswa,nomor_induk,' . $siswa->id,
+            'alamat' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:tb_siswa,email,' . $siswa->id,
+            'telp' => 'required|string|max:20',
+            'kelas' => 'required|string|max:50',
+            'jurusan' => 'required|string|max:100',
+            'username' => 'required|string|max:255|unique:tb_siswa,username,' . $siswa->id,
+
+        ]);
+
+        // Hash the password if it's being updated
+        if ($request->filled('password')) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        } else {
+            // Remove the password field if it's not being updated
+            unset($validatedData['password']);
+        }
+
+        // Update the Siswa_Models instance with the validated data
+        $siswa->update($validatedData);
+
+        toastr()->success('Update Data Successfully');
+        return redirect()->back();
     }
 
     /**
@@ -98,8 +122,10 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Siswa_Models $siswa)
     {
-        //
+        $siswa->delete();
+        toastr()->success('Deleted Data Successfully');
+        return redirect()->back();
     }
 }

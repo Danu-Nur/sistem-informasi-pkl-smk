@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @section('content')
-
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -24,21 +23,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data_siswa as $siswa)
-                                <tr>
-                                    <td>{{ $siswa->nama_siswa }}</td>
-                                    <td>{{ $siswa->nomor_induk }}</td>
-                                    <td>{{ $siswa->alamat }}</td>
-                                    <td>{{ $siswa->email }}</td>
-                                    <td>{{ $siswa->telp }}</td>
-                                    <td>{{ $siswa->kelas }}</td>
-                                    <td>{{ $siswa->jurusan }}</td>
-                                    <td>{{ $siswa->username }}</td>
-                                    <td>{{ $siswa->password }}</td>
-                                </tr>
-                            @endforeach
+                            @if ($data_siswa)
+                                @foreach ($data_siswa as $siswa)
+                                    <tr>
+                                        <td>{{ $siswa->nama_siswa }}</td>
+                                        <td>{{ $siswa->nomor_induk }}</td>
+                                        <td>{{ $siswa->alamat }}</td>
+                                        <td>{{ $siswa->email }}</td>
+                                        <td>{{ $siswa->telp }}</td>
+                                        <td>{{ $siswa->kelas }}</td>
+                                        <td>{{ $siswa->jurusan }}</td>
+                                        <td>{{ $siswa->username }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="text-secondary"
+                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="fa fa-pencil color-muted"></i>
+                                            </a>
+                                            <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
+                                                data-placement="top" title="Delete"
+                                                onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $siswa->id }}').submit(); }">
+                                                <i class="fa fa-trash color-danger"></i>
+                                            </a>
 
+                                            <form id="delete-form-{{ $siswa->id }}"
+                                                action="{{ route('admin.siswa.destroy', $siswa->id) }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
 
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
 
                         </tbody>
                     </table>
