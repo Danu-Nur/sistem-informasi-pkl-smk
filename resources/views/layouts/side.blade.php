@@ -22,7 +22,7 @@
 
             {{-- MENU UTAMA --}}
             <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <a class="has-arrow" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
             </li>
