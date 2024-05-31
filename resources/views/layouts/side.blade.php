@@ -10,8 +10,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.user.index') }}">Data Users</a></li>
                     <li><a href="{{ route('admin.siswa.index') }}">Data Siswa</a></li>
-                    <li><a href="#">Data PKL</a></li>
-                    <li><a href="#">Data LOKASI PKL</a></li>
+                    <li><a href="{{ route('admin.pkl.index') }}">Data PKL</a></li>
                     <li><a href="#">Data JADWAL</a></li>
                     <li><a href="#">Data ABSENSI</a></li>
                     <li><a href="#">Data KEGIATAN PKL</a></li>

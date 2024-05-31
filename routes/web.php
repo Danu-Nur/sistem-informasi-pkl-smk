@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PKLController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -17,20 +18,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ROUTR LOGIN & LOGOUT
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Route::middleware('admin')->group(function () {
-//     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-//     Route::get('/admin/siswa', [SiswaController::class, 'index'])->name('admin.siswa');
-// });
-
+// ROUTE SUPER ADMIN
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::resource('siswa', SiswaController::class);
     Route::resource('user', UsersController::class);
+    Route::resource('pkl', PKLController::class);
 });
+
+// ROUTE ADMIN
+
+
+// ROUTE SISWA
+
+
+// ROUTE PEMBIMBING SEKOLAH
+
+
+// ROUTE PEMBIMBING INDUSTRI
+
 
 // Route::get('/', function () {
 //     return view('welcome');

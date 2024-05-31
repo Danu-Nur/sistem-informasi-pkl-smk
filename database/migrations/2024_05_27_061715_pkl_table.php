@@ -16,7 +16,7 @@ class PklTable extends Migration
         Schema::create('tb_pkl', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pkl')->nullable();
-            $table->text('Alamat_pkl')->nullable();
+            $table->text('alamat_pkl')->nullable();
             $table->text('lokasi_pkl')->nullable();
             $table->foreignId('siswa_id')->nullable()->constrained('tb_siswa')->onDelete('set null');
             $table->foreignId('psekolah_id')->nullable()->constrained('users')->onDelete('set null');
