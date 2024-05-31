@@ -21,11 +21,26 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'SUPER',
         ]);
+
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'ADMIN',
+        ]);
+
+        User::create([
+            'name' => 'Pembimbing Sekolah',
+            'email' => 'sekolah@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'PEMBIMBING SEKOLAH',
+        ]);
+
+        User::create([
+            'name' => 'Pembimbing Industri',
+            'email' => 'industri@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'PEMBIMBING INDUSTRI',
         ]);
     }
 }

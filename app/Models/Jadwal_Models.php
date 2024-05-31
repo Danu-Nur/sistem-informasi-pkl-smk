@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal_Models extends Model
 {
     use HasFactory;
+    protected $table = 'tb_jadwal';
     protected $fillable = [
         'pkl_id',
         'tanggal',

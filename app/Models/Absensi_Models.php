@@ -9,6 +9,7 @@ class Absensi_Models extends Model
 {
     use HasFactory;
 
+    protected $table = 'tb_absensi';
     protected $fillable = [
         'siswa_id',
         'pkl_id',

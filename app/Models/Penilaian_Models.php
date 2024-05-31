@@ -9,6 +9,7 @@ class Penilaian_Models extends Model
 {
     use HasFactory;
 
+    protected $table = 'tb_penilaian';
     protected $fillable = [
         'siswa_id',
         'kegiatan_id',
