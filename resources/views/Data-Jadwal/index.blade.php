@@ -15,23 +15,17 @@
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
                                 <th>Lokasi PKL</th>
-                                <th>Siswa PKL</th>
-                                <th>Pembimbing Sekolah</th>
-                                <th>Pembimbing Industri</th>
                                 <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @if ($data_pkl)
-                                @foreach ($data_pkl as $data)
+                            @if ($data_jadwal)
+                                @foreach ($data_jadwal as $data)
                                     <tr>
-                                        <td>{{ $data->nama_pkl }}</td>
-                                        <td>{{ $data->alamat_pkl }}</td>
-                                        <td>{{ $data->lokasi_pkl }}</td>
-                                        <td>{{ $data->siswa->nama_siswa }}</td>
-                                        <td>{{ $data->pembimbingSekolah->name }}</td>
-                                        <td>{{ $data->pembimbingIndustri->name }}</td>
+                                        <td>{{ $data->pkl->nama_pkl }}</td>
+                                        <td>{{ $data->tanggal }}</td>
+                                        <td>{{ $data->jam }}</td>
 
                                         <td>
                                             <a href="{{ route('admin.pkl.edit', $data->id) }}" class="text-secondary"

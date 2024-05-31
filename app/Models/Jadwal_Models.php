@@ -15,4 +15,9 @@ class Jadwal_Models extends Model
         'jam',
 
     ];
+
+    public function pkl()
+    {
+        return $this->belongsTo(PKL_Models::class, 'pkl_id');
+    }
 }
