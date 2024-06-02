@@ -40,8 +40,8 @@ class JadwalController extends Controller
     {
         $validateData = $request->validate([
             'pkl_id' => 'required',
-            'tanggal_id' => 'required',
-            'jam_id' => 'required',
+            'tanggal' => 'required',
+            'jam' => 'required',
         ]);
 
         Jadwal_Models::create($validateData);
@@ -70,7 +70,7 @@ class JadwalController extends Controller
     public function edit(Jadwal_Models $jadwal)
     {
         $data_pkl = PKL_Models::all();
-        return view('Data-Jadwal.edit', compact('data_pkl'));
+        return view('Data-Jadwal.edit', compact('data_pkl', 'jadwal'));
     }
 
     /**
@@ -84,8 +84,8 @@ class JadwalController extends Controller
     {
         $validateData = $request->validate([
             'pkl_id' => 'required',
-            'tanggal_id' => 'required',
-            'jam_id' => 'required',
+            'tanggal' => 'required',
+            'jam' => 'required',
         ]);
 
         $jadwal->update($validateData);

@@ -34,4 +34,9 @@ class PKL_Models extends Model
     {
         return $this->belongsTo(Siswa_Models::class, 'siswa_id');
     }
+
+    public function jadwals()
+    {
+        return $this->hasMany(Jadwal_Models::class, 'pkl_id');
+    }
 }

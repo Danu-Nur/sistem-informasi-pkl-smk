@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JadwalController;
@@ -31,6 +32,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::resource('user', UsersController::class);
     Route::resource('pkl', PKLController::class);
     Route::resource('jadwal', JadwalController::class);
+    Route::resource('absensi',AbsensiController::class);
 });
 
 // ROUTE ADMIN

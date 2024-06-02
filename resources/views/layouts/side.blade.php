@@ -8,11 +8,11 @@
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Master Data</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.user.index') }}">Data Users</a></li>
-                    <li><a href="{{ route('admin.siswa.index') }}">Data Siswa</a></li>
+                    <li><a href="{{ route('admin.user.index') }}">Data USERS</a></li>
+                    <li><a href="{{ route('admin.siswa.index') }}">Data SISWA</a></li>
                     <li><a href="{{ route('admin.pkl.index') }}">Data PKL</a></li>
                     <li><a href="{{ route('admin.jadwal.index') }}">Data JADWAL</a></li>
-                    <li><a href="#">Data ABSENSI</a></li>
+                    <li><a href="{{ route('admin.absensi.index') }}">Data ABSENSI</a></li>
                     <li><a href="#">Data KEGIATAN PKL</a></li>
                     <li><a href="#">Data PENILAIAN</a></li>
                     <li><a href="#">Data LAPORAN</a></li>

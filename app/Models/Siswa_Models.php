@@ -21,4 +21,9 @@ class Siswa_Models extends Model
         'username',
         'password',
     ];
+
+    public function pkls()
+    {
+        return $this->hasMany(PKL_Models::class);
+    }
 }
