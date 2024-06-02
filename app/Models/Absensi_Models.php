@@ -21,4 +21,19 @@ class Absensi_Models extends Model
         'lokasi_absen',
 
     ];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa_Models::class, 'siswa_id');
+    }
+
+    public function pkl()
+    {
+        return $this->belongsTo(PKL_Models::class, 'pkl_id');
+    }
+
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal_Models::class, 'jadwal_id');
+    }
 }
