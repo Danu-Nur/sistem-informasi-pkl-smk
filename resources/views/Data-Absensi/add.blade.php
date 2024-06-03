@@ -1,235 +1,142 @@
 @extends('layouts.layout')
 @section('content')
     {{-- @dump($absensi) --}}
+
     <style>
-        .clock-layout {
-            width: 100%;
-            background: black;
+        .container {
+            height: 100%;
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
         }
 
         .clock {
-            height: 20vh;
+            border: 1px solid #606060;
             color: white;
-            font-size: 22vh;
-            font-family: sans-serif;
-            line-height: 20.4vh;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #222222;
+        }
+
+        #Date {
+            font-size: 20px !important;
+            text-align: center;
+        }
+
+        .clock ul {
+            list-style: none;
             display: flex;
-            position: relative;
-            /*background: green;*/
-            overflow: hidden;
-        }
-
-        .clock::before,
-        .clock::after {
-            content: "";
-            width: 7ch;
-            height: 3vh;
-            background: linear-gradient(to top, transparent, black);
-            position: absolute;
-            z-index: 2;
-        }
-
-        .clock::after {
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent, black);
-        }
-
-        .clock>div {
-            display: flex;
-        }
-
-        .tick {
-            line-height: 17vh;
-        }
-
-        .tick-hidden {
-            opacity: 0;
-        }
-
-        .move {
-            animation: move linear 1s infinite;
-        }
-
-        @keyframes move {
-            from {
-                transform: translateY(0vh);
-            }
-
-            to {
-                transform: translateY(-20vh);
-            }
+            font-size: 6vw;
+            gap: 15px;
         }
     </style>
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Form Tambah Data</h4>
-                <div class="basic-form">
+                <h4 class="card-title">Absen PKL</h4>
+                <div class="basic-form mb-4">
                     <div class="clock-layout">
-                        <div class="clock">
-                            <div class="hours">
-                                <div class="first">
-                                    <div class="number">0</div>
-                                </div>
-                                <div class="second">
-                                    <div class="number">0</div>
-                                </div>
-                            </div>
-                            <div class="tick">:</div>
-                            <div class="minutes">
-                                <div class="first">
-                                    <div class="number">0</div>
-                                </div>
-                                <div class="second">
-                                    <div class="number">0</div>
-                                </div>
-                            </div>
-                            <div class="tick">:</div>
-                            <div class="seconds">
-                                <div class="first">
-                                    <div class="number">0</div>
-                                </div>
-                                <div class="second infinite">
-                                    <div class="number">0</div>
-                                </div>
+                        <div class="container">
+                            <div class="clock">
+                                <div id="Date">Senin 26 September 2024</div>
+
+                                <ul>
+                                    <li id="hours">00</li>
+                                    <li id="point">:</li>
+                                    <li id="min">00</li>
+                                    <li id="point">:</li>
+                                    <li id="sec">00</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-
-                    {{-- <form action="{{ route('admin.pkl.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label>Nama PKL</label>
-                            <input type="text" name="nama_pkl" class="form-control" placeholder="Nama PKL">
-
-                        </div>
-                        <div class="form-group">
-                            <label>Alamat PKL</label>
-                            <input type="text" name="alamat_pkl" class="form-control" placeholder="Alamat PKL">
-                        </div>
-                        <div class="form-group">
-                            <label>Lokasi PKL</label>
-                            <input type="text" name="lokasi_pkl" class="form-control" placeholder="Nomor Telephone">
-                        </div> --}}
-                    {{-- <div class="form-group">
-                            <label>Siswa PKL</label>
-                            <select id="inputState" name="siswa_id" class="form-control">
-                                @if ($data_siswa)
-                                    @foreach ($data_siswa as $siswa)
-                                        <option value="{{ $siswa->id }}">{{ $siswa->nama_siswa }}
-                                        </option>
-                                    @endforeach
-                                @endif
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Pembimbing Sekolah</label>
-                            <select id="inputState" name="psekolah_id" class="form-control">
-                                @if ($data_psekolah)
-                                    @foreach ($data_psekolah as $psekolah)
-                                        <option value="{{ $psekolah->id }}">{{ $psekolah->name }}
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Pembimbing Industri</label>
-                            <select id="inputState" name="pindustri_id" class="form-control">
-                                @if ($data_pindustri)
-                                    @foreach ($data_pindustri as $pindustri)
-                                        <option value="{{ $pindustri->id }}">{{ $pindustri->name }}
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div> --}}
-                    {{-- <a href="{{ route('admin.pkl.index') }}" type="button" class="btn btn-primary">Back</a>
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </form> --}}
                 </div>
+
+                <h4 class="card-title mb-2">My Location</h4>
+                <iframe id="map-frame" width="100%" height="300px" frameborder="0" scrolling="no" marginheight="0"
+                    marginwidth="0" style="border: 1px solid black"></iframe>
+
+                <p class="card-title">Turn On your location and Refresh this page if location not show</p>
+
+
             </div>
         </div>
+
     </div>
     <script>
-        var hoursContainer = document.querySelector('.hours')
-        var minutesContainer = document.querySelector('.minutes')
-        var secondsContainer = document.querySelector('.seconds')
-        var tickElements = Array.from(document.querySelectorAll('.tick'))
+        function clock() {
 
-        var last = new Date(0)
-        last.setUTCHours(-1)
+            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Augustus", "September", "Okober", "November", "Desember"
+            ];
+            var dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"]
 
-        var tickState = true
+            var today = new Date();
 
-        function updateTime() {
-            var now = new Date
+            document.getElementById('Date').innerHTML = (dayNames[today.getDay()] + " " +
+                today.getDate() + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear());
 
-            var lastHours = last.getHours().toString()
-            var nowHours = now.getHours().toString()
-            if (lastHours !== nowHours) {
-                updateContainer(hoursContainer, nowHours)
-            }
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
 
-            var lastMinutes = last.getMinutes().toString()
-            var nowMinutes = now.getMinutes().toString()
-            if (lastMinutes !== nowMinutes) {
-                updateContainer(minutesContainer, nowMinutes)
-            }
+            h = h < 10 ? '0' + h : h;
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
 
-            var lastSeconds = last.getSeconds().toString()
-            var nowSeconds = now.getSeconds().toString()
-            if (lastSeconds !== nowSeconds) {
-                //tick()
-                updateContainer(secondsContainer, nowSeconds)
-            }
+            document.getElementById('hours').innerHTML = h;
+            document.getElementById('min').innerHTML = m;
+            document.getElementById('sec').innerHTML = s;
 
-            last = now
+        }
+        var inter = setInterval(clock, 1000);
+    </script>
+
+    <script>
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Update the iframe src attribute
+            var mapFrame = document.getElementById('map-frame');
+            mapFrame.src = 'https://www.openstreetmap.org/export/embed.html?bbox=' + (longitude - 0.05) + '%2C' + (
+                    latitude - 0.05) + '%2C' + (longitude + 0.05) + '%2C' + (latitude + 0.05) + '&layer=mapnik&marker=' +
+                latitude + '%2C' + longitude;
+
+            // Update the link href attribute
+            var mapLink = document.getElementById('map-link');
+            mapLink.href = 'https://www.openstreetmap.org/?mlat=' + latitude + '&mlon=' + longitude + '#map=15/' +
+                latitude + '/' + longitude;
         }
 
-        function tick() {
-            tickElements.forEach(t => t.classList.toggle('tick-hidden'))
-        }
-
-        function updateContainer(container, newTime) {
-            var time = newTime.split('')
-
-            if (time.length === 1) {
-                time.unshift('0')
-            }
-
-
-            var first = container.firstElementChild
-            if (first.lastElementChild.textContent !== time[0]) {
-                updateNumber(first, time[0])
-            }
-
-            var last = container.lastElementChild
-            if (last.lastElementChild.textContent !== time[1]) {
-                updateNumber(last, time[1])
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
             }
         }
 
-        function updateNumber(element, number) {
-            //element.lastElementChild.textContent = number
-            var second = element.lastElementChild.cloneNode(true)
-            second.textContent = number
-
-            element.appendChild(second)
-            element.classList.add('move')
-
-            setTimeout(function() {
-                element.classList.remove('move')
-            }, 990)
-            setTimeout(function() {
-                element.removeChild(element.firstElementChild)
-            }, 990)
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
         }
 
-        setInterval(updateTime, 1000)
+        // Get the location when the page loads
+        window.onload = getLocation;
     </script>
 @endsection
