@@ -14,11 +14,13 @@ class Absensi_Models extends Model
         'siswa_id',
         'pkl_id',
         'jadwal_id',
+        'tanggal_absen',
         'waktu_absen',
         'status_absen',
         'latitude',
         'longitude',
         'lokasi_absen',
+        'link_absen'
 
     ];
 

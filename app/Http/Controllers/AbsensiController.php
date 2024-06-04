@@ -16,9 +16,16 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $data_jadwal = Jadwal_Models::with('pkl.siswa')->get();
+        // $data_jadwal = Jadwal_Models::with('pkl.siswa')->whereDoesntHave('absensi')
+        //     ->get();;
+        $absensiJadwalIds = Absensi_Models::pluck('jadwal_id')->toArray();
+
+        // Get all Jadwal that do not have corresponding Absensi records
+        $data_jadwal = Jadwal_Models::with('pkl.siswa')
+            ->whereNotIn('id', $absensiJadwalIds)
+            ->get();
         $data_absensi = Absensi_Models::with(['pkl', 'jadwal'])->get();
-        return view('Data-Absensi.index', compact('data_jadwal','data_absensi'));
+        return view('Data-Absensi.index', compact('data_jadwal', 'data_absensi'));
     }
 
     /**
@@ -28,10 +35,6 @@ class AbsensiController extends Controller
      */
     public function create()
     {
-        // $data_siswa = Siswa_Models::all();
-        // $data_pkl = Siswa_Models::all();
-        // $data_jadwal = Siswa_Models::all();
-
     }
 
     /**
@@ -42,7 +45,39 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'siswa_id' => 'required',
+            'pkl_id' => 'required',
+            'jadwal_id' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'lokasi_absen' => 'required',
+            'link_absen' => 'required',
+        ]);
+
+        $tanggal = $request->tanggal;
+        $jam = $request->jam;
+
+        $statusAbsen = 'Tepat Waktu';
+        $tanggalabsen = date('Y-m-d');
+        $waktuabsen =  date('H:i:s');
+
+        if ($tanggalabsen > $tanggal && $waktuabsen > $jam) {
+            $statusAbsen = 'Terlambat';
+        }
+
+        if ($tanggalabsen < $tanggal && $waktuabsen > $jam) {
+            $statusAbsen = 'Terlambat';
+        }
+
+        $validateData['tanggal_absen'] = $tanggalabsen;
+        $validateData['waktu_absen'] = $waktuabsen;
+        $validateData['status_absen'] = $statusAbsen;
+
+        Absensi_Models::create($validateData);
+
+        toastr()->success('Absen Successfully');
+        return redirect()->route('admin.absensi.index');
     }
 
     /**
@@ -86,8 +121,10 @@ class AbsensiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Absensi_Models $absensi)
     {
-        //
+        $absensi->delete();
+        toastr()->success('Delete data Successfully');
+        return redirect()->back();
     }
 }

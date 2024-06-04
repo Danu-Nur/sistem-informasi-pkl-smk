@@ -58,8 +58,32 @@
                 <iframe id="map-frame" width="100%" height="300px" frameborder="0" scrolling="no" marginheight="0"
                     marginwidth="0" style="border: 1px solid black"></iframe>
 
-                <p class="card-title">Turn On your location and Refresh this page if location not show</p>
+                <p class="card-title" id="lokasi-absensi">Lokasi Absen : </p>
+                <br>
+                <p class="card-title">catatan : Nyalakan lokasi Anda dan Muat ulang halaman ini jika lokasi tidak
+                    ditampilkan</p>
+                <form id="submit-absensi" action="{{ route('admin.absensi.store') }}" method="POST">
+                    @csrf
+                    <input type="text" id="siswa_id" name="siswa_id" value="{{ $absensi->pkl->siswa_id }}">
+                    <input type="text" id="pkl_id" name="pkl_id" value="{{ $absensi->pkl_id }}">
+                    <input type="text" id="jadwal_id" name="jadwal_id" value="{{ $absensi->id }}">
+                    <input type="text" id="tanggal" name="tanggal" value="{{ $absensi->tanggal }}">
+                    <input type="text" id="jam" name="jam" value="{{ $absensi->jam }}">
+                    <input type="text" id="latitude" name="latitude" value="">
+                    <input type="text" id="longitude" name="longitude" value="">
+                    <input type="text" id="lokasi_absen" name="lokasi_absen" value="">
+                    <input type="text" id="link_absen" name="link_absen" value="">
+                </form>
 
+                <div style="display: flex;flex-warp:warp; justify-content:center;" class="mt-4">
+                    <a href="{{ route('admin.pkl.index') }}" type="button" class="btn btn-primary"><i
+                            class="fa fa-arrow-left color-muted"></i> Back
+                    </a>
+                    <button id="button-submit" type="button" onclick="document.getElementById('submit-absensi').submit()"
+                        class="btn btn-success ml-3" disabled>
+                        Absen Now <i class="fa fa-address-book color-muted"></i>
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -106,9 +130,34 @@
                 latitude + '%2C' + longitude;
 
             // Update the link href attribute
-            var mapLink = document.getElementById('map-link');
-            mapLink.href = 'https://www.openstreetmap.org/?mlat=' + latitude + '&mlon=' + longitude + '#map=15/' +
-                latitude + '/' + longitude;
+            // var mapLink = document.getElementById('map-link');
+            // mapLink.href = 'https://www.openstreetmap.org/?mlat=' + latitude + '&mlon=' + longitude + '#map=15/' +
+            //     latitude + '/' + longitude;
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+            document.getElementById('link_absen').value = 'https://www.openstreetmap.org/export/embed.html?bbox=' + (
+                    longitude - 0.05) + '%2C' + (
+                    latitude - 0.05) + '%2C' + (longitude + 0.05) + '%2C' + (latitude + 0.05) + '&layer=mapnik&marker=' +
+                latitude + '%2C' + longitude;
+            getAddress(latitude, longitude);
+        }
+
+        function getAddress(latitude, longitude) {
+            console.log('run get address');
+            var url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var address = data.display_name;
+                    console.log(address);
+                    document.getElementById('lokasi-absensi').innerText = `Lokasi: ${address}`;
+                    document.getElementById('lokasi_absen').value = address;
+                    document.getElementById('button-submit').disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error fetching address:', error);
+                });
         }
 
         function showError(error) {
@@ -138,5 +187,12 @@
 
         // Get the location when the page loads
         window.onload = getLocation;
+    </script>
+    <script>
+        function submitAbsensi() {
+
+
+
+        }
     </script>
 @endsection
