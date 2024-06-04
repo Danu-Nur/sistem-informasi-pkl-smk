@@ -18,11 +18,13 @@ class AbsensiTable extends Migration
             $table->foreignId('siswa_id')->nullable()->constrained('tb_siswa')->onDelete('set null');
             $table->foreignId('pkl_id')->nullable()->constrained('tb_pkl')->onDelete('set null');
             $table->foreignId('jadwal_id')->nullable()->constrained('tb_jadwal')->onDelete('set null');
-            $table->dateTime('waktu_absen')->nullable();
+            $table->date('tanggal_absen')->nullable();
+            $table->time('waktu_absen')->nullable();
             $table->string('status_absen')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->text('lokasi_absen')->nullable();
+            $table->text('link_absen')->nullable();
             $table->timestamps();
         });
     }
