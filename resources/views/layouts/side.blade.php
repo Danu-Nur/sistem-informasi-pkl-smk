@@ -13,7 +13,7 @@
                     <li><a href="{{ route('admin.pkl.index') }}">Data PKL</a></li>
                     <li><a href="{{ route('admin.jadwal.index') }}">Data JADWAL</a></li>
                     <li><a href="{{ route('admin.absensi.index') }}">Data ABSENSI</a></li>
-                    <li><a href="#">Data KEGIATAN PKL</a></li>
+                    <li><a href="{{ route('admin.kegiatan.index') }}">Data KEGIATAN PKL</a></li>
                     <li><a href="#">Data PENILAIAN</a></li>
                     <li><a href="#">Data LAPORAN</a></li>
                 </ul>
