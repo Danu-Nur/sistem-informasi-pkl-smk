@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi_Models;
+use App\Models\Kegiatan_Models;
 use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
@@ -15,7 +16,7 @@ class KegiatanController extends Controller
     public function index()
     {
         $data_absensi = Absensi_Models::with(['pkl', 'jadwal'])->get();
-        return view('Data-Kegiatan.index',compact('data_absensi'));
+        return view('Data-Kegiatan.index', compact('data_absensi'));
     }
 
     /**
@@ -45,9 +46,9 @@ class KegiatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Absensi_Models $kegiatan)
     {
-        //
+        return view('Data-Kegiatan.add', compact('kegiatan'));
     }
 
     /**

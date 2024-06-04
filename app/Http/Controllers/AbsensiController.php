@@ -70,6 +70,10 @@ class AbsensiController extends Controller
             $statusAbsen = 'Terlambat';
         }
 
+        if ($tanggalabsen > $tanggal && $waktuabsen < $jam) {
+            $statusAbsen = 'Terlambat';
+        }
+
         $validateData['tanggal_absen'] = $tanggalabsen;
         $validateData['waktu_absen'] = $waktuabsen;
         $validateData['status_absen'] = $statusAbsen;

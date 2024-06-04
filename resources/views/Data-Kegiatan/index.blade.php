@@ -17,7 +17,7 @@
                                 <th>Tanggal Absen</th>
                                 <th>Jam Absen</th>
                                 <th>Status</th>
-                                {{-- <th>Opsi</th> --}}
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,25 +34,25 @@
                                         <td>{{ $data->waktu_absen }}</td>
                                         <td>{{ $data->status_absen }}</td>
 
-                                        {{-- <td>
-                                        <a href="{{ route('admin.pkl.edit', $data->id) }}" class="text-secondary"
-                                            data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="fa fa-pencil color-muted"></i>
-                                        </a>
-                                        <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
-                                            data-placement="top" title="Delete"
-                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $data->id }}').submit(); }">
-                                            <i class="fa fa-trash color-danger"></i>
-                                        </a>
+                                        <td>
+                                            <a href="{{ route('admin.kegiatan.show', $data->id) }}" class="btn btn-info text-white"
+                                                data-toggle="tooltip" data-placement="top" title="Tambah Kegiatan">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            {{-- <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
+                                                data-placement="top" title="Delete"
+                                                onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $data->id }}').submit(); }">
+                                                <i class="fa fa-trash color-danger"></i>
+                                            </a>
 
-                                        <form id="delete-form-{{ $data->id }}"
-                                            action="{{ route('admin.absensi.destroy', $data->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+                                            <form id="delete-form-{{ $data->id }}"
+                                                action="{{ route('admin.absensi.destroy', $data->id) }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form> --}}
 
-                                    </td> --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endif

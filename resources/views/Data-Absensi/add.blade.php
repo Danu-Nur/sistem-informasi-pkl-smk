@@ -64,15 +64,15 @@
                     ditampilkan</p>
                 <form id="submit-absensi" action="{{ route('admin.absensi.store') }}" method="POST">
                     @csrf
-                    <input type="text" id="siswa_id" name="siswa_id" value="{{ $absensi->pkl->siswa_id }}">
-                    <input type="text" id="pkl_id" name="pkl_id" value="{{ $absensi->pkl_id }}">
-                    <input type="text" id="jadwal_id" name="jadwal_id" value="{{ $absensi->id }}">
-                    <input type="text" id="tanggal" name="tanggal" value="{{ $absensi->tanggal }}">
-                    <input type="text" id="jam" name="jam" value="{{ $absensi->jam }}">
-                    <input type="text" id="latitude" name="latitude" value="">
-                    <input type="text" id="longitude" name="longitude" value="">
-                    <input type="text" id="lokasi_absen" name="lokasi_absen" value="">
-                    <input type="text" id="link_absen" name="link_absen" value="">
+                    <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $absensi->pkl->siswa_id }}">
+                    <input type="hidden" id="pkl_id" name="pkl_id" value="{{ $absensi->pkl_id }}">
+                    <input type="hidden" id="jadwal_id" name="jadwal_id" value="{{ $absensi->id }}">
+                    <input type="hidden" id="tanggal" name="tanggal" value="{{ $absensi->tanggal }}">
+                    <input type="hidden" id="jam" name="jam" value="{{ $absensi->jam }}">
+                    <input type="hidden" id="latitude" name="latitude" value="">
+                    <input type="hidden" id="longitude" name="longitude" value="">
+                    <input type="hidden" id="lokasi_absen" name="lokasi_absen" value="">
+                    <input type="hidden" id="link_absen" name="link_absen" value="">
                 </form>
 
                 <div style="display: flex;flex-warp:warp; justify-content:center;" class="mt-4">

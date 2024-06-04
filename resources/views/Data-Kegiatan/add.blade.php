@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('content')
+@dump($kegiatan)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -10,12 +11,12 @@
                         <div class="form-group">
                             <label>Siswa PKL</label>
                             <select id="inputState" name="pkl_id" class="form-control">
-                                @if ($data_pkl)
+                                {{-- @if ($data_pkl)
                                     @foreach ($data_pkl as $pkl)
                                         <option value="{{ $pkl->id }}">{{ $pkl->nama_pkl }}
                                         </option>
                                     @endforeach
-                                @endif
+                                @endif --}}
                             </select>
                         </div>
                         <div class="form-group">
