@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PKLController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UsersController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::resource('jadwal', JadwalController::class);
     Route::resource('absensi', AbsensiController::class);
     Route::resource('kegiatan', KegiatanController::class);
+    Route::resource('nilai', NilaiController::class);
 });
 
 // ROUTE ADMIN
