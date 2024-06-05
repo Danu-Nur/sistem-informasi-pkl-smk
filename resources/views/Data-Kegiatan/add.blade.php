@@ -1,33 +1,26 @@
 @extends('layouts.layout')
 @section('content')
-@dump($kegiatan)
+    {{-- @dump($kegiatan) --}}
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Form Tambah Data</h4>
                 <div class="basic-form">
-                    <form action="{{ route('admin.jadwal.store') }}" method="POST">
+                    <form action="{{ route('admin.kegiatan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" id="pkl_id" name="pkl_id" value="{{ $kegiatan->pkl_id }}">
+                        <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $kegiatan->siswa_id }}">
+                        <input type="hidden" id="jadwal_id" name="jadwal_id" value="{{ $kegiatan->jadwal_id }}">
+                        <input type="hidden" id="absensi_id" name="absensi_id" value="{{ $kegiatan->id }}">
                         <div class="form-group">
-                            <label>Siswa PKL</label>
-                            <select id="inputState" name="pkl_id" class="form-control">
-                                {{-- @if ($data_pkl)
-                                    @foreach ($data_pkl as $pkl)
-                                        <option value="{{ $pkl->id }}">{{ $pkl->nama_pkl }}
-                                        </option>
-                                    @endforeach
-                                @endif --}}
-                            </select>
+                            <label>Foto Kegiatan</label>
+                            <input type="file" name="dokumentasi" class="form-control" placeholder="Dokumentasi PKL">
                         </div>
                         <div class="form-group">
-                            <label>Tanggal</label>
-                            <input type="date" name="tanggal" class="form-control" placeholder="Tanggal PKL">
+                            <label>Keterangan</label>
+                            <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan PKL"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Jam</label>
-                            <input type="time" name="jam" class="form-control" placeholder="Jam PKL">
-                        </div>
-                        <a href="{{ route('admin.jadwal.index') }}" type="button" class="btn btn-primary">Back</a>
+                        <a href="{{ route('admin.kegiatan.index') }}" type="button" class="btn btn-primary">Back</a>
                         <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>

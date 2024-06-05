@@ -18,6 +18,7 @@ class KegiatanTable extends Migration
             $table->foreignId('pkl_id')->nullable()->constrained('tb_pkl')->onDelete('set null');
             $table->foreignId('siswa_id')->nullable()->constrained('tb_siswa')->onDelete('set null');
             $table->foreignId('jadwal_id')->nullable()->constrained('tb_jadwal')->onDelete('set null');
+            $table->foreignId('absensi_id')->nullable()->constrained('tb_absensi')->onDelete('set null');
             $table->string('dokumentasi')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
