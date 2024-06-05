@@ -17,7 +17,8 @@ class PenilaianTable extends Migration
             $table->id();
             $table->foreignId('siswa_id')->nullable()->constrained('tb_siswa')->onDelete('set null');
             $table->foreignId('kegiatan_id')->nullable()->constrained('tb_kegiatan')->onDelete('set null');
-            $table->integer('nilai')->nullable();
+            $table->string('nilai_pkl')->nullable();
+            $table->string('nilai_sikap')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

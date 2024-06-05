@@ -13,7 +13,8 @@ class Penilaian_Models extends Model
     protected $fillable = [
         'siswa_id',
         'kegiatan_id',
-        'nilai',
+        'nilai_pkl',
+        'nilai_sikap',
         'keterangan',
 
     ];
