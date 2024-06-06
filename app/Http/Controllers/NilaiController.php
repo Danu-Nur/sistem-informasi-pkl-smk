@@ -18,7 +18,7 @@ class NilaiController extends Controller
         $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
         $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
         $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl'])->get();
-        return view('Data-Nilai.index', compact('data_kegiatan','data_nilai'));
+        return view('Data-Nilai.index', compact('data_kegiatan', 'data_nilai'));
     }
 
     /**
@@ -72,9 +72,10 @@ class NilaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Penilaian_Models $nilai)
     {
-        //
+        $nilai->load(['siswa', 'kegiatan.jadwal.pkl'])->get();
+        return view('Data-Nilai.edit', compact('nilai'));
     }
 
     /**
@@ -84,9 +85,22 @@ class NilaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Penilaian_Models $nilai)
     {
-        //
+        $validateData = $request->validate([
+            'siswa_id' => 'required',
+            'kegiatan_id' => 'required',
+            'nilai_pkl' => 'required',
+            'nilai_sikap' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        // dd($validateData);
+
+        $nilai->update($validateData);
+
+        toastr()->success('Update Nilai Successfully!');
+        return redirect()->route('admin.nilai.index');
     }
 
     /**

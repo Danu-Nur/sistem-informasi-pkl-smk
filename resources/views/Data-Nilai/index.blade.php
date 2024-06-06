@@ -79,7 +79,7 @@
                                 <th>Nilai PKL</th>
                                 <th>Nilai Sikap</th>
                                 <th>Keterangan</th>
-                                {{-- <th>Opsi</th> --}}
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,10 +98,10 @@
                                             <img src="{{ asset($data->dokumentasi) }}" height="100px" width="100px" alt="">
                                         </td> --}}
 
-                                        {{-- <td>
-                                            <a href="{{ route('admin.kegiatan.show', $data->id) }}" class="btn btn-info text-white"
-                                                data-toggle="tooltip" data-placement="top" title="Tambah Kegiatan">
-                                                <i class="fa fa-edit"></i>
+                                        <td>
+                                            <a href="{{ route('admin.nilai.edit', $data->id) }}"
+                                                data-toggle="tooltip" data-placement="top" title="Edit Kegiatan">
+                                                <i class="fa fa-pencil"></i>
                                             </a>
                                             <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
                                                 data-placement="top" title="Delete"
@@ -116,7 +116,7 @@
                                                 @method('DELETE')
                                             </form>
 
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endif
