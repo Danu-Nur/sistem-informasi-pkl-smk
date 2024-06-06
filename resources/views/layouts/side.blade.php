@@ -2,10 +2,18 @@
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
             {{-- <li class="nav-label">Dashboard</li> --}}
+
+            {{-- MENU UTAMA --}}
+            <li>
+                <a class="has-arrow" href="{{ route('admin.dashboard') }}" aria-expanded="false">
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                </a>
+            </li>
+
             {{-- MASTER DATA --}}
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Master Data</span>
+                    <i class="fa fa-database menu-icon"></i><span class="nav-text">Master Data</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.user.index') }}">Data USERS</a></li>
@@ -15,17 +23,11 @@
                     <li><a href="{{ route('admin.absensi.index') }}">Data ABSENSI</a></li>
                     <li><a href="{{ route('admin.kegiatan.index') }}">Data KEGIATAN PKL</a></li>
                     <li><a href="{{ route('admin.nilai.index') }}">Data PENILAIAN</a></li>
-                    <li><a href="#">Data LAPORAN</a></li>
+                    <li><a href="{{ route('admin.laporan.index') }}">Data LAPORAN</a></li>
                 </ul>
             </li>
             {{-- END MASTER DATA --}}
 
-            {{-- MENU UTAMA --}}
-            <li>
-                <a class="has-arrow" href="{{ route('admin.dashboard') }}" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                </a>
-            </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-list menu-icon"></i><span class="nav-text">Mendaftar PKL</span>
