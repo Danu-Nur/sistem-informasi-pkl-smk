@@ -5,8 +5,8 @@
         <div class="card">
             <div class="card-body">
                 <h4>Foto Kegiatan</h4>
-                <div class="media align-items-center mb-4">
-                    <img class="mr-3" src="{{ asset($nilai->dokumentasi) }}" width="100%" alt="">
+                <div class="media align-items-center mb-4"  style="display: flex;flex-wrap: wrap;justify-content: center;">
+                    <img class="mr-3" src="{{ asset($nilai->dokumentasi) }}" width="500px" alt="">
                     {{-- <div class="media-body">
                         <h3 class="mb-0">Pikamy Cha</h3>
                         <p class="text-muted mb-0">Canada</p>
@@ -49,10 +49,10 @@
             <div class="card-body">
                 <h4 class="card-title">Form Penilaian</h4>
                 <div class="basic-form">
-                    <form action="{{ route('admin.kegiatan.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.nilai.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" id="pkl_id" name="pkl_id" value="{{ $nilai->pkl_id }}">
-                        <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $nilai->siswa_id }}">
+                        <input type="text" id="siswa_id" name="siswa_id" value="{{ $nilai->siswa_id }}">
+                        <input type="text" id="kegiatan_id" name="kegiatan_id" value="{{ $nilai->id }}">
                         <div class="form-group">
                             <label>Nilai PKL</label>
                             <input type="text" name="nilai_pkl" class="form-control" placeholder="Nilai PKL">
@@ -65,7 +65,7 @@
                             <label>Keterangan</label>
                             <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan PKL"></textarea>
                         </div>
-                        <a href="{{ route('admin.kegiatan.index') }}" type="button" class="btn btn-primary">Back</a>
+                        <a href="{{ route('admin.nilai.index') }}" type="button" class="btn btn-primary">Back</a>
                         <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>

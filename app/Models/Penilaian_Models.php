@@ -18,4 +18,14 @@ class Penilaian_Models extends Model
         'keterangan',
 
     ];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa_Models::class, 'siswa_id');
+    }
+
+    public function kegiatan()
+    {
+        return $this->belongsTo(Kegiatan_Models::class, 'kegiatan_id');
+    }
 }

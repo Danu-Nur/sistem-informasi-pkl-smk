@@ -73,29 +73,30 @@
                         <thead>
                             <tr>
                                 <th>Nama PKL</th>
-                                <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
                                 <th>Tanggal PKL</th>
                                 <th>Jam PKL</th>
-                                <th>Dokumentasi</th>
+                                <th>Nama Siswa</th>
+                                <th>Nilai PKL</th>
+                                <th>Nilai Sikap</th>
                                 <th>Keterangan</th>
                                 {{-- <th>Opsi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
 
-                            @if ($data_kegiatan)
-                                @foreach ($data_kegiatan as $data)
+                            @if ($data_nilai)
+                                @foreach ($data_nilai as $data)
                                     <tr>
-                                        <td>{{ $data->pkl->nama_pkl }}</td>
-                                        <td>{{ $data->pkl->alamat_pkl }}</td>
-                                        <td>{{ $data->pkl->lokasi_pkl }}</td>
-                                        <td>{{ $data->jadwal->tanggal }}</td>
-                                        <td>{{ $data->jadwal->jam }}</td>
-                                        <td>
-                                            <img src="{{ asset($data->dokumentasi) }}" height="100px" width="100px" alt="">
-                                        </td>
+                                        <td>{{ $data->kegiatan->jadwal->pkl->nama_pkl }}</td>
+                                        <td>{{ $data->kegiatan->jadwal->tanggal }}</td>
+                                        <td>{{ $data->kegiatan->jadwal->jam }}</td>
+                                        <td>{{ $data->siswa->nama_siswa }}</td>
+                                        <td>{{ $data->nilai_pkl }}</td>
+                                        <td>{{ $data->nilai_sikap }}</td>
                                         <td>{{ $data->keterangan }}</td>
+                                        {{-- <td>
+                                            <img src="{{ asset($data->dokumentasi) }}" height="100px" width="100px" alt="">
+                                        </td> --}}
 
                                         {{-- <td>
                                             <a href="{{ route('admin.kegiatan.show', $data->id) }}" class="btn btn-info text-white"
@@ -109,7 +110,7 @@
                                             </a>
 
                                             <form id="delete-form-{{ $data->id }}"
-                                                action="{{ route('admin.absensi.destroy', $data->id) }}" method="POST"
+                                                action="{{ route('admin.nilai.destroy', $data->id) }}" method="POST"
                                                 style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
