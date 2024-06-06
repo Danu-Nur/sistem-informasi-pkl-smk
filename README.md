@@ -1,4 +1,22 @@
-## testing
+## Project Requirements
+- PHP 7.4
+
+## CARA INSTALL
+- Clone Repository
+- Composer Install
+- Create new Database on mysql
+- Copy Paste file ".env.example"
+- rename file ".env.example" yg sudah di copy menjadi ".env"
+- pada bagian "DB_DATABASE" isi dengan nama database yang sudah dibuat sebelumnya
+- jalankan perintah "php artisan key:generate" pada terminal
+- jalankan perintah "php artisan migrate:fresh" pada terminal
+- jalankan perintah "php artisan db:seed" pada terminal
+- jalankan perintah "php artisan optimize:clear" pada terminal
+- jalankan perintah "php artisan serve" pada terminal untuk menjalankan aplikasi
+
+## LOGIN APLIKASI
+- Role : Super Admin, email:admin@gmail.com, password:password
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
