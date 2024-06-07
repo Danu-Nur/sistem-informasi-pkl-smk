@@ -48,7 +48,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
 
 
 // ROUTE PEMBIMBING SEKOLAH
-
+Route::group(['middleware' => ['psekolah'], 'prefix' => 'psekolah', 'as' => 'psekolah.'], function () {
+    // Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::resource('absensi', AbsensiController::class);
+    Route::resource('nilai', NilaiController::class);
+});
 
 // ROUTE PEMBIMBING INDUSTRI
 
