@@ -58,7 +58,10 @@
             <div class="card">
                 <div class="social-graph-wrapper widget-facebook">
                     {{-- <span class="s-icon"><i class="fa fa-facebook"></i></span> --}}
-                    <h2>Absensi</h2>
+                    <span class="s-icon">
+                        <h2 class=" text-white">Absensi</h2>
+                    </span>
+
                 </div>
                 <div class="row">
                     <div class="col-6 border-right">
@@ -79,7 +82,10 @@
         <div class="col-lg-4 col-sm-6">
             <div class="card">
                 <div class="social-graph-wrapper widget-linkedin">
-                    <span class="s-icon"><i class="fa fa-linkedin"></i></span>
+                    {{-- <span class="s-icon"><i class="fa fa-linkedin"></i></span> --}}
+                    <span class="s-icon">
+                        <h2 class=" text-white">Absensi</h2>
+                    </span>
                 </div>
                 <div class="row">
                     <div class="col-6 border-right">
@@ -100,7 +106,10 @@
         <div class="col-lg-4 col-sm-6">
             <div class="card">
                 <div class="social-graph-wrapper widget-googleplus">
-                    <span class="s-icon"><i class="fa fa-google-plus"></i></span>
+                    {{-- <span class="s-icon"><i class="fa fa-google-plus"></i></span> --}}
+                    <span class="s-icon">
+                        <h2 class=" text-white">Absensi</h2>
+                    </span>
                 </div>
                 <div class="row">
                     <div class="col-6 border-right">
