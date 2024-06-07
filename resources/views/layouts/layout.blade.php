@@ -48,7 +48,18 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('layouts.side')
+
+        {{-- @dump(Auth::user()->role) --}}
+
+        @if (Auth::user()->role == 'ADMIN')
+            @include('layouts.sidebar.sidebar-admin')
+        @elseif (Auth::user()->role == 'PEMBIMBING SEKOLAH')
+            @include('layouts.sidebar.sidebar-pembimbing-sekolah')
+        @elseif (Auth::user()->role == 'PEMBIMBING INDUSTRI')
+            @include('layouts.sidebar.sidebar-pembimbing-industri')
+        @else
+            @include('layouts.sidebar.side')
+        @endif
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -61,7 +72,7 @@
             <div class="container-fluid mt-3">
                 {{-- <div class="row"> --}}
 
-                    @yield('content')
+                @yield('content')
                 {{-- </div> --}}
             </div>
         </div>
