@@ -6,6 +6,7 @@ use App\Models\Absensi_Models;
 use App\Models\Jadwal_Models;
 use App\Models\Siswa_Models;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AbsensiController extends Controller
 {
@@ -16,16 +17,70 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        // $data_jadwal = Jadwal_Models::with('pkl.siswa')->whereDoesntHave('absensi')
-        //     ->get();;
-        $absensiJadwalIds = Absensi_Models::pluck('jadwal_id')->toArray();
+        $userId = Auth::id();
+        $userRole = Auth::user()->role;
 
-        // Get all Jadwal that do not have corresponding Absensi records
-        $data_jadwal = Jadwal_Models::with('pkl.siswa')
-            ->whereNotIn('id', $absensiJadwalIds)
-            ->get();
-        $data_absensi = Absensi_Models::with(['pkl', 'jadwal'])->get();
-        return view('Data-Absensi.index', compact('data_jadwal', 'data_absensi'));
+        if (in_array($userRole, ['PEMBIMBING SEKOLAH', 'PEMBIMBING INDUSTRI'])) {
+            $column = $this->getRoleColumn($userRole);
+
+            // Ambil semua data absensi yang terkait dengan pengguna yang sedang login
+            $data_absensi_dump = Absensi_Models::whereHas('pkl', function ($query) use ($userId, $column) {
+                $query->where($column, $userId);
+            });
+
+            $data_absensi = $data_absensi_dump->with(['pkl', 'jadwal'])->get();
+
+            // Ambil semua jadwal yang tidak ada di tabel absensi untuk pengguna yang sedang login
+            $absensiJadwalIds = $data_absensi_dump->pluck('jadwal_id')->toArray();
+
+            $data_jadwal = Jadwal_Models::with('pkl.siswa')
+                ->whereHas('pkl', function ($query) use ($userId, $column) {
+                    $query->where($column, $userId);
+                })
+                ->whereNotIn('id', $absensiJadwalIds)
+                ->get();
+        } elseif ($userRole == 'SISWA') {
+            $data_absensi_dump = Absensi_Models::whereHas('pkl', function ($query) use ($userId) {
+                $query->whereHas('siswa', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                });
+            });
+
+            $data_absensi = $data_absensi_dump->with(['pkl', 'jadwal'])->get();
+
+            // Ambil semua jadwal yang tidak ada di tabel absensi untuk pengguna yang sedang login
+            $absensiJadwalIds = $data_absensi_dump->pluck('jadwal_id')->toArray();
+
+            $data_jadwal = Jadwal_Models::with('pkl.siswa')
+                ->whereHas('pkl', function ($query) use ($userId) {
+                    $query->whereHas('siswa', function ($query) use ($userId) {
+                        $query->where('user_id', $userId);
+                    });
+                })
+                ->whereNotIn('id', $absensiJadwalIds)
+                ->get();
+        } else {
+            // Default case for other roles
+            $absensiJadwalIds = Absensi_Models::pluck('jadwal_id')->toArray();
+
+            // Get all Jadwal that do not have corresponding Absensi records
+            $data_jadwal = Jadwal_Models::with('pkl.siswa')
+                ->whereNotIn('id', $absensiJadwalIds)
+                ->get();
+            $data_absensi = Absensi_Models::with(['pkl', 'jadwal'])->get();
+        }
+
+        return view('Data-Absensi.index', compact('data_jadwal', 'data_absensi', 'userRole'));
+    }
+
+    private function getRoleColumn($role)
+    {
+        $roleColumnMap = [
+            'PEMBIMBING SEKOLAH' => 'psekolah_id',
+            'PEMBIMBING INDUSTRI' => 'pindustri_id',
+        ];
+
+        return $roleColumnMap[$role] ?? null;
     }
 
     /**
@@ -45,6 +100,7 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
+        $userRole = Auth::user()->role;
         $validateData = $request->validate([
             'siswa_id' => 'required',
             'pkl_id' => 'required',
@@ -81,7 +137,12 @@ class AbsensiController extends Controller
         Absensi_Models::create($validateData);
 
         toastr()->success('Absen Successfully');
-        return redirect()->route('admin.absensi.index');
+
+        if ($userRole === 'ADMIN') {
+            return redirect()->route('admin.absensi.index');
+        } else {
+            return redirect()->route('siswa.absensi.index');
+        }
     }
 
     /**
@@ -92,8 +153,9 @@ class AbsensiController extends Controller
      */
     public function show(Jadwal_Models $absensi)
     {
+        $userRole = Auth::user()->role;
         $absensi->load('pkl.siswa');
-        return view('Data-Absensi.add', compact('absensi'));
+        return view('Data-Absensi.add', compact('absensi', 'userRole'));
     }
 
     /**

@@ -62,22 +62,26 @@
                 <br>
                 <p class="card-title">catatan : Nyalakan lokasi Anda dan Muat ulang halaman ini jika lokasi tidak
                     ditampilkan</p>
-                <form id="submit-absensi" action="{{ route('admin.absensi.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $absensi->pkl->siswa_id }}">
-                    <input type="hidden" id="pkl_id" name="pkl_id" value="{{ $absensi->pkl_id }}">
-                    <input type="hidden" id="jadwal_id" name="jadwal_id" value="{{ $absensi->id }}">
-                    <input type="hidden" id="tanggal" name="tanggal" value="{{ $absensi->tanggal }}">
-                    <input type="hidden" id="jam" name="jam" value="{{ $absensi->jam }}">
-                    <input type="hidden" id="latitude" name="latitude" value="">
-                    <input type="hidden" id="longitude" name="longitude" value="">
-                    <input type="hidden" id="lokasi_absen" name="lokasi_absen" value="">
-                    <input type="hidden" id="link_absen" name="link_absen" value="">
+                @if ($userRole == 'ADMIN')
+                    <form id="submit-absensi" action="{{ route('admin.absensi.store') }}" method="POST">
+                    @else
+                        <form id="submit-absensi" action="{{ route('siswa.absensi.store') }}" method="POST">
+                @endif
+                @csrf
+                <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $absensi->pkl->siswa_id }}">
+                <input type="hidden" id="pkl_id" name="pkl_id" value="{{ $absensi->pkl_id }}">
+                <input type="hidden" id="jadwal_id" name="jadwal_id" value="{{ $absensi->id }}">
+                <input type="hidden" id="tanggal" name="tanggal" value="{{ $absensi->tanggal }}">
+                <input type="hidden" id="jam" name="jam" value="{{ $absensi->jam }}">
+                <input type="hidden" id="latitude" name="latitude" value="">
+                <input type="hidden" id="longitude" name="longitude" value="">
+                <input type="hidden" id="lokasi_absen" name="lokasi_absen" value="">
+                <input type="hidden" id="link_absen" name="link_absen" value="">
                 </form>
 
                 <div style="display: flex;flex-warp:warp; justify-content:center;" class="mt-4">
-                    <a href="{{ route('admin.pkl.index') }}" type="button" class="btn btn-primary"><i
-                            class="fa fa-arrow-left color-muted"></i> Back
+                    <a href="{{ $userRole == 'ADMIN' ? route('admin.absensi.index') : route('siswa.absensi.index') }}"
+                        type="button" class="btn btn-primary"><i class="fa fa-arrow-left color-muted"></i> Back
                     </a>
                     <button id="button-submit" type="button" onclick="document.getElementById('submit-absensi').submit()"
                         class="btn btn-success ml-3" disabled>

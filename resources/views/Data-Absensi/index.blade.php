@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @section('content')
-    {{-- @dump($data_absensi) --}}
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -18,7 +17,9 @@
                                 <th>Lokasi PKL</th>
                                 <th>Tanggal PKL</th>
                                 <th>Jam PKL</th>
-                                <th>Opsi</th>
+                                @if (in_array($userRole, ['ADMIN', 'SISWA']))
+                                    <th>Opsi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -31,14 +32,15 @@
                                         <td>{{ $data->pkl->lokasi_pkl }}</td>
                                         <td>{{ $data->tanggal }}</td>
                                         <td>{{ $data->jam }}</td>
-
-                                        <td>
-                                            <a href="{{ route('admin.absensi.show', $data->id) }}" class="btn btn-success text-white"
-                                                data-toggle="tooltip" data-placement="top" title="Absen Sekarang">
-                                                <i class="fa fa-address-book color-muted"></i>
-                                            </a>
-
-                                        </td>
+                                        @if (in_array($userRole, ['ADMIN', 'SISWA']))
+                                            <td>
+                                                <a href="{{ $userRole == 'ADMIN' ? route('admin.absensi.show', $data->id) : route('siswa.absensi.show', $data->id) }}"
+                                                    class="btn btn-success text-white" data-toggle="tooltip"
+                                                    data-placement="top" title="Absen Sekarang">
+                                                    <i class="fa fa-address-book color-muted"></i>
+                                                </a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             @endif
