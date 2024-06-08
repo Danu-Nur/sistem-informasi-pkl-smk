@@ -6,6 +6,7 @@ use App\Models\Absensi_Models;
 use App\Models\Kegiatan_Models;
 use Illuminate\Http\Request;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Auth;
 
 class KegiatanController extends Controller
 {
@@ -17,13 +18,32 @@ class KegiatanController extends Controller
      */
     public function index()
     {
+        $idUser = Auth::id();
+        $roleUser = Auth::user()->role;
+
         $kegiatanAbsensiIds = Kegiatan_Models::pluck('absensi_id')->toArray();
-        $data_absensi = Absensi_Models::with(['pkl', 'jadwal'])
+        $queryKegiatanModel =  Kegiatan_Models::whereHas('pkl', function ($query) use ($idUser) {
+            $query->whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            });
+        });
+
+        if ($roleUser == 'ADMIN') {
+            $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->get();
+        } else {
+
+            $data_kegiatan = $queryKegiatanModel->with(['siswa', 'pkl', 'jadwal', 'absensi'])->get();
+        }
+
+        $data_absensi = Absensi_Models::whereHas('pkl', function ($query) use ($idUser) {
+            $query->whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            });
+        })->with(['pkl', 'jadwal'])
             ->whereNotIn('id', $kegiatanAbsensiIds)
             ->get();
 
-        $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->get();
-        return view('Data-Kegiatan.index', compact('data_absensi', 'data_kegiatan'));
+        return view('Data-Kegiatan.index', compact('roleUser', 'data_absensi', 'data_kegiatan'));
     }
 
     /**
@@ -44,6 +64,7 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
+        $roleUser = Auth::user()->role;
         $validateData = $request->validate([
             'pkl_id' => 'required',
             'siswa_id' => 'required',
@@ -58,8 +79,11 @@ class KegiatanController extends Controller
         Kegiatan_Models::create($validateData);
 
         toastr()->success('Data saved successfully.');
-
-        return redirect()->route('admin.kegiatan.index');
+        if ($roleUser === 'ADMIN') {
+            return redirect()->route('admin.kegiatan.index');
+        } else {
+            return redirect()->route('siswa.kegiatan.index');
+        }
     }
 
     /**
@@ -70,7 +94,9 @@ class KegiatanController extends Controller
      */
     public function show(Absensi_Models $kegiatan)
     {
-        return view('Data-Kegiatan.add', compact('kegiatan'));
+        $idUser = Auth::id();
+        $roleUser = Auth::user()->role;
+        return view('Data-Kegiatan.add', compact('kegiatan', 'roleUser'));
     }
 
     /**

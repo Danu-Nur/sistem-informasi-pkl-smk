@@ -35,7 +35,7 @@
                                         <td>{{ $data->status_absen }}</td>
 
                                         <td>
-                                            <a href="{{ route('admin.kegiatan.show', $data->id) }}" class="btn btn-info text-white"
+                                            <a href="{{ $roleUser == 'ADMIN' ? route('admin.kegiatan.show', $data->id) : route('siswa.kegiatan.show', $data->id) }}" class="btn btn-info text-white"
                                                 data-toggle="tooltip" data-placement="top" title="Tambah Kegiatan">
                                                 <i class="fa fa-edit"></i>
                                             </a>

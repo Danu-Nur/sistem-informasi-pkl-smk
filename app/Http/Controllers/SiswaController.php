@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa_Models;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
@@ -36,7 +38,10 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        // $roleAdmin = Auth::user()->role;
+
         $validatedData = $request->validate([
+            'user_id' => 'required',
             'nama_siswa' => 'required|string|max:255',
             'nomor_induk' => 'required|string|max:255|unique:tb_siswa,nomor_induk',
             'alamat' => 'required|string|max:255',
@@ -44,15 +49,27 @@ class SiswaController extends Controller
             'telp' => 'required|string|max:20',
             'kelas' => 'required|string|max:50',
             'jurusan' => 'required|string|max:100',
-            'username' => 'required|string|max:255|unique:tb_siswa,username',
-            'password' => 'required',
+            // 'username' => 'required|string|max:255|unique:tb_siswa,username',
+            // 'password' => 'required',
         ]);
-
         // Hash the password before saving
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        if ($request->filled('password')) {
+            $validatedData['password'] = bcrypt($request->password);
+        } else {
+            // Remove the password field if it's not being updated
+            unset($validatedData['password']);
+        }
 
         // Create the Siswa_Models instance with the validated data
         Siswa_Models::create($validatedData);
+
+        $user = User::findOrFail($validatedData['user_id']);
+        $user->name = $validatedData['nama_siswa'];
+        $user->email = $validatedData['email'];
+        if (!empty($validatedData['password'])) {
+            $user->password = bcrypt($validatedData['password']);
+        }
+        $user->save();
 
         toastr()->success('Create Data Successfully');
         return redirect()->back();
@@ -100,10 +117,10 @@ class SiswaController extends Controller
             'username' => 'required|string|max:255|unique:tb_siswa,username,' . $siswa->id,
 
         ]);
-
+        // dd($request->filled('password'));
         // Hash the password if it's being updated
         if ($request->filled('password')) {
-            $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['password'] = bcrypt($request->password);
         } else {
             // Remove the password field if it's not being updated
             unset($validatedData['password']);

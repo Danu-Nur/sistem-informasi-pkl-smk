@@ -11,6 +11,7 @@ class Siswa_Models extends Model
 
     protected $table = 'tb_siswa';
     protected $fillable = [
+        'user_id',
         'nama_siswa',
         'nomor_induk',
         'alamat',
