@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jadwal_Models;
 use App\Models\PKL_Models;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalController extends Controller
 {
@@ -15,9 +16,24 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $data_jadwal = Jadwal_Models::with('pkl')->get();
-        return view('Data-Jadwal.index', compact('data_jadwal'));
+        $idUser = Auth::id();
+        $roleUser = Auth::user()->role;
+
+        if ($roleUser === 'SISWA') {
+            // Ambil jadwal yang terkait dengan siswa yang sedang login
+            $data_jadwal = Jadwal_Models::whereHas('pkl', function ($query) use ($idUser) {
+                $query->whereHas('siswa', function ($query) use ($idUser) {
+                    $query->where('user_id', $idUser);
+                });
+            })->with('pkl.siswa')->get();
+        } else {
+            // Ambil semua jadwal dengan relasi 'pkl'
+            $data_jadwal = Jadwal_Models::with('pkl.siswa')->get();
+        }
+
+        return view('Data-Jadwal.index', compact('data_jadwal', 'roleUser'));
     }
+
 
     /**
      * Show the form for creating a new resource.
