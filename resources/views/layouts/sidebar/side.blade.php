@@ -29,32 +29,27 @@
             {{-- END MASTER DATA --}}
 
             <li>
-                <a class="has-arrow" href="" aria-expanded="false">
+                <a class="has-arrow" href="{{ route('siswa.daftar.index') }}" aria-expanded="false">
                     <i class="icon-list menu-icon"></i><span class="nav-text">Mendaftar PKL</span>
                 </a>
             </li>
             <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <a class="has-arrow" href="{{ route('siswa.jadwal.index') }}" aria-expanded="false">
                     <i class="icon-map menu-icon"></i><span class="nav-text">Jadwal & Lokasi PKL</span>
                 </a>
             </li>
             <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <a class="has-arrow" href="{{ route('siswa.absensi.index') }}" aria-expanded="false">
                     <i class="icon-check menu-icon"></i><span class="nav-text">Absensi</span>
                 </a>
             </li>
             <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <a class="has-arrow" href="{{ route('siswa.kegiatan.index') }}" aria-expanded="false">
                     <i class="icon-book-open menu-icon"></i><span class="nav-text">Kegiatan PKL</span>
                 </a>
             </li>
             <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-badge menu-icon"></i><span class="nav-text">Penilaian</span>
-                </a>
-            </li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <a class="has-arrow" href="{{ route('siswa.laporan.index') }}" aria-expanded="false">
                     <i class="icon-chart menu-icon"></i><span class="nav-text">Laporan</span>
                 </a>
             </li>
