@@ -15,6 +15,7 @@ class SiswaTable extends Migration
     {
         Schema::create('tb_siswa', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->string('nama_siswa')->nullable();
             $table->string('nomor_induk')->nullable();
             $table->string('alamat')->nullable();
@@ -22,8 +23,8 @@ class SiswaTable extends Migration
             $table->string('telp')->nullable();
             $table->string('kelas')->nullable();
             $table->string('jurusan')->nullable();
-            $table->string('username')->nullable();
-            $table->string('password')->nullable();
+            // $table->string('username')->nullable();
+            // $table->string('password')->nullable();
             $table->timestamps();
         });
     }

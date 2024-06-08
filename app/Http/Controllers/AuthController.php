@@ -23,8 +23,10 @@ class AuthController extends Controller
                 return redirect()->intended('/admin/dashboard');
             } elseif ($user->role === 'PEMBIMBING SEKOLAH') {
                 return redirect()->intended('/psekolah/absensi');
+            } elseif ($user->role === 'PEMBIMBING INDUSTRI') {
+                return redirect()->intended('/pindustri/absensi');
             } else {
-                return redirect()->intended('/user/dashboard');
+                return redirect()->intended('/siswa/daftar');
             }
         }
 

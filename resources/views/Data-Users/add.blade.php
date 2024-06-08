@@ -26,6 +26,7 @@
                                 <option value="ADMIN">Admin</option>
                                 <option value="PEMBIMBING SEKOLAH">Pembimbing Sekolah</option>
                                 <option value="PEMBIMBING INDUSTRI">Pembimbing Industri</option>
+                                <option value="SISWA">Siswa</option>
                             </select>
                         </div>
                         <div class="form-group">
