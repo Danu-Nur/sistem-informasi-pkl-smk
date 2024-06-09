@@ -9,6 +9,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PKLController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ROUTE ADMIN
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    // Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('profile',[ProfileController::class,'index'])->name('profile');
+    Route::put('profile/update/{profile}',[ProfileController::class,'update'])->name('profile.update');
     Route::resource('siswa', SiswaController::class);
     Route::resource('user', UsersController::class);
     Route::resource('pkl', PKLController::class);
