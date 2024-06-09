@@ -51,8 +51,8 @@
                 <div class="basic-form">
                     <form action="{{ route('admin.nilai.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="text" id="siswa_id" name="siswa_id" value="{{ $nilai->siswa_id }}">
-                        <input type="text" id="kegiatan_id" name="kegiatan_id" value="{{ $nilai->id }}">
+                        <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $nilai->siswa_id }}">
+                        <input type="hidden" id="kegiatan_id" name="kegiatan_id" value="{{ $nilai->id }}">
                         <div class="form-group">
                             <label>Nilai PKL</label>
                             <input type="text" name="nilai_pkl" class="form-control" placeholder="Nilai PKL">

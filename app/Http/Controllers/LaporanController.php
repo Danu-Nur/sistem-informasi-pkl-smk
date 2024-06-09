@@ -22,9 +22,23 @@ class LaporanController extends Controller
     {
         $idUser = Auth::id();
         $roleUser = Auth::user()->role;
-        $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
-        $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
-        $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+        if ($roleUser == 'ADMIN') {
+            $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
+            $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+            $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+        } else {
+            $nilaiKegiatanIds = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            })->pluck('kegiatan_id')->toArray();
+
+            $data_kegiatan = Kegiatan_Models::whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            })->with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+
+            $data_nilai = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            })->with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+        }
         return view('Data-laporan.index', compact('data_kegiatan', 'data_nilai', 'idUser', 'roleUser'));
     }
 
@@ -42,7 +56,7 @@ class LaporanController extends Controller
             $idUser = Auth::id();
             $data_siswa = PKL_Models::whereHas('siswa', function ($query) use ($idUser) {
                 $query->where('user_id', $idUser);
-            })->with(['siswa','pembimbingSekolah','pembimbingIndustri'])->first();
+            })->with(['siswa', 'pembimbingSekolah', 'pembimbingIndustri'])->first();
             $data_nilai = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
                 $query->where('user_id', $idUser);
             })->with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
@@ -50,7 +64,7 @@ class LaporanController extends Controller
             $idsiswa = 6;
             $data_siswa = PKL_Models::whereHas('siswa', function ($query) use ($idsiswa) {
                 $query->where('id', $idsiswa);
-            })->with(['siswa','pembimbingSekolah','pembimbingIndustri'])->first();
+            })->with(['siswa', 'pembimbingSekolah', 'pembimbingIndustri'])->first();
             $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
         }
 

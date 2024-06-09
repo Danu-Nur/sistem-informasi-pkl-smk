@@ -33,8 +33,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // ROUTE ADMIN
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     // Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('profile',[ProfileController::class,'index'])->name('profile');
-    Route::put('profile/update/{profile}',[ProfileController::class,'update'])->name('profile.update');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('siswa', SiswaController::class);
     Route::resource('user', UsersController::class);
     Route::resource('pkl', PKLController::class);
@@ -50,7 +50,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
 
 // ROUTE SISWA
 Route::group(['middleware' => ['siswa'], 'prefix' => 'siswa', 'as' => 'siswa.'], function () {
-    Route::get('daftar',[DaftarPklController::class, 'index'])->name('daftar.index');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('daftar', [DaftarPklController::class, 'index'])->name('daftar.index');
     Route::resource('siswa', SiswaController::class);
     Route::resource('jadwal', JadwalController::class);
     Route::resource('absensi', AbsensiController::class);
@@ -62,6 +64,8 @@ Route::group(['middleware' => ['siswa'], 'prefix' => 'siswa', 'as' => 'siswa.'],
 // ROUTE PEMBIMBING SEKOLAH
 Route::group(['middleware' => ['psekolah'], 'prefix' => 'psekolah', 'as' => 'psekolah.'], function () {
     // Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('absensi', AbsensiController::class);
     Route::resource('nilai', NilaiController::class);
 });
@@ -70,6 +74,8 @@ Route::group(['middleware' => ['psekolah'], 'prefix' => 'psekolah', 'as' => 'pse
 // ROUTE PEMBIMBING INDUSTRI
 Route::group(['middleware' => ['pindustri'], 'prefix' => 'pindustri', 'as' => 'pindustri.'], function () {
     // Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('absensi', AbsensiController::class);
     Route::resource('nilai', NilaiController::class);
 });
