@@ -52,7 +52,7 @@
 </script>
 
 <!-- Inisialisasi DataTables -->
-<script>
+{{-- <script>
     $(document).ready(function() {
         $('#dataTable').DataTable({
             dom: 'Bfrtip',
@@ -61,4 +61,4 @@
             ]
         });
     });
-</script>
+</script> --}}

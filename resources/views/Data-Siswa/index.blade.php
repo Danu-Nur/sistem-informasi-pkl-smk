@@ -18,7 +18,7 @@
                                 <th>Telp</th>
                                 <th>Kelas</th>
                                 <th>Jurusan</th>
-                                <th>Username</th>
+                                {{-- <th>Username</th> --}}
                                 <th>Opsi</th>
                             </tr>
                         </thead>
@@ -33,7 +33,7 @@
                                         <td>{{ $siswa->telp }}</td>
                                         <td>{{ $siswa->kelas }}</td>
                                         <td>{{ $siswa->jurusan }}</td>
-                                        <td>{{ $siswa->username }}</td>
+                                        {{-- <td>{{ $siswa->username }}</td> --}}
                                         <td>
                                             <a href="{{ route('admin.siswa.edit', $siswa->id) }}" class="text-secondary"
                                                 data-toggle="tooltip" data-placement="top" title="Edit">

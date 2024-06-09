@@ -27,7 +27,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('Data-Siswa.add');
+        $idUserSiswa = Siswa_Models::pluck('user_id')->toArray();
+        $data_user = User::where('role','SISWA')->whereNotIn('id', $idUserSiswa)->get();
+        return view('Data-Siswa.add', compact('data_user', 'idUserSiswa'));
     }
 
     /**

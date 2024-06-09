@@ -26,8 +26,8 @@
                                         <td>{{ $data->email }}</td>
                                         <td>{{ $data->phone }}</td>
                                         <td>
-                                            @if ($data->role == 'SUPER')
-                                                <span class="label label-primary">Super Admin</span>
+                                            @if ($data->role == 'SISWA')
+                                                <span class="label label-primary">Siswa</span>
                                             @elseif ($data->role == 'ADMIN')
                                                 <span class="label label-secondary">Admin</span>
                                             @elseif ($data->role == 'PEMBIMBING SEKOLAH')
