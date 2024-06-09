@@ -165,7 +165,20 @@
                         <div class="dropdown-content-body">
                             <ul>
                                 <li>
-                                    <a href="{{ route('admin.profile') }}"><i class="icon-user"></i> <span>Profile</span></a>
+                                    {{-- {{ Auth::user()->role }} --}}
+                                    @if (Auth::user()->role == 'ADMIN')
+                                        <a href="{{ route('admin.profile') }}"><i class="icon-user"></i>
+                                            <span>Profile</span></a>
+                                    @elseif(Auth::user()->role == 'PEMBIMBING SEKOLAH')
+                                        <a href="{{ route('psekolah.profile') }}"><i class="icon-user"></i>
+                                            <span>Profile</span></a>
+                                    @elseif(Auth::user()->role == 'PEMBIMBING INDUSTRI')
+                                        <a href="{{ route('pindustri.profile') }}"><i class="icon-user"></i>
+                                            <span>Profile</span></a>
+                                    @else
+                                        <a href="{{ route('siswa.profile') }}"><i class="icon-user"></i>
+                                            <span>Profile</span></a>
+                                    @endif
                                 </li>
                                 {{-- <li>
                                     <a href="javascript:void()">
@@ -179,7 +192,8 @@
                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                 </li> --}}
                                 <li>
-                                    <a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a>
+                                    <a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i>
+                                        <span>Logout</span></a>
                                 </li>
                             </ul>
                         </div>

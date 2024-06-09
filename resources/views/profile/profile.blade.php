@@ -8,24 +8,32 @@
                         <i class="icon-people"></i>
                     </span>
                 </div>
-                <form action="{{ route('admin.profile.update', $user->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label><strong>Nama</strong></label>
-                        <input type="text" name="name" class="form-control" placeholder="Nama User"
-                            value="{{ $user->name }}">
-                    </div>
-                    <div class="form-group">
-                        <label><strong>Email</strong></label>
-                        <input type="email" name="email" class="form-control" placeholder="Email"
-                            value="{{ $user->email }}">
-                    </div>
-                    <div class="form-group">
-                        <label><strong>Password</strong></label>
-                        <input type="text" name="password" class="form-control" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-danger px-5">Update</button>
+                @if (Auth::user()->role == 'ADMIN')
+                    <form action="{{ route('admin.profile.update', $user->id) }}" method="POST">
+                    @elseif(Auth::user()->role == 'PEMBIMBING SEKOLAH')
+                        <form action="{{ route('psekolah.profile.update', $user->id) }}" method="POST">
+                        @elseif(Auth::user()->role == 'PEMBIMBING INDUSTRI')
+                            <form action="{{ route('pindustri.profile.update', $user->id) }}" method="POST">
+                            @else
+                                <form action="{{ route('siswa.profile.update', $user->id) }}" method="POST">
+                @endif
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label><strong>Nama</strong></label>
+                    <input type="text" name="name" class="form-control" placeholder="Nama User"
+                        value="{{ $user->name }}">
+                </div>
+                <div class="form-group">
+                    <label><strong>Email</strong></label>
+                    <input type="email" name="email" class="form-control" placeholder="Email"
+                        value="{{ $user->email }}">
+                </div>
+                <div class="form-group">
+                    <label><strong>Password</strong></label>
+                    <input type="text" name="password" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-danger px-5">Update</button>
                 </form>
 
             </div>
