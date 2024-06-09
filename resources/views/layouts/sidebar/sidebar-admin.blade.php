@@ -4,11 +4,11 @@
             {{-- <li class="nav-label">Dashboard</li> --}}
 
             {{-- MENU UTAMA --}}
-            <li>
+            {{-- <li>
                 <a class="has-arrow" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
-            </li>
+            </li> --}}
 
             {{-- MASTER DATA --}}
             <li>

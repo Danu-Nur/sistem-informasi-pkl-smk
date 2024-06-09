@@ -4,8 +4,8 @@
     <div class="form-input-content">
         <div class="card login-form mb-0">
             <div class="card-body pt-5">
-                <a class="text-center" href="index.html">
-                    <h4>LOGIN</h4>
+                <a class="text-center" href="{{ route('login') }}">
+                    <h4>LOGIN PKL</h4>
                 </a>
                 <style>
                     .containers {
@@ -16,7 +16,7 @@
                 </style>
 
                 <div class="containers">
-                    <h1>LOGO</h1>
+                    <img src="{{ asset('logo/logo-smk.png') }}" width="50%" alt="">
                 </div>
 
                 <form class="mt-5 mb-5 login-input" action="{{ route('login.post') }}" method="POST">

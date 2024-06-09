@@ -1,11 +1,13 @@
-<div class="nav-header">
-    <div class="brand-logo">
-        <a href="index.html">
-            <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-            <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
-            <span class="brand-title">
-                <img src="images/logo-text.png" alt="">
+<div class="nav-header" style="background: #cfcfcf !important;">
+    <div class="brand-logo" style="display: flex;flex-wrap:wrap;justify-content:center;">
+        <img src="{{ asset('logo/logo-smk.png') }}" class="ml-2 mt-1" width="70px" alt="">
+        {{-- <a href="index.html"> --}}
+            {{-- <span class="logo-compact">
             </span>
-        </a>
+            <img src="{{ asset('logo/logo-smk.png') }}" alt=""> --}}
+            {{-- <span class="brand-title">
+                <img src="{{ asset('logo/logo-smk.png') }}" alt="">
+            </span> --}}
+        {{-- </a> --}}
     </div>
 </div>
