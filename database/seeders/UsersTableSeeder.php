@@ -15,13 +15,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // User::create([
-        //     'name' => 'Super User',
-        //     'email' => 'super@gmail.com',
-        //     'password' => Hash::make('password'),
-        //     'role' => 'SUPER',
-        // ]);
-
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@gmail.com',
@@ -41,6 +34,27 @@ class UsersTableSeeder extends Seeder
             'email' => 'industri@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'PEMBIMBING INDUSTRI',
+        ]);
+
+        User::create([
+            'name' => 'Siswa',
+            'email' => 'siswa@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'SISWA',
+        ]);
+
+        User::create([
+            'name' => 'Siswa 1',
+            'email' => 'siswa1@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'SISWA',
+        ]);
+
+        User::create([
+            'name' => 'Siswa 2',
+            'email' => 'siswa2@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'SISWA',
         ]);
     }
 }
