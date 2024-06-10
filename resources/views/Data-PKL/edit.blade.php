@@ -20,7 +20,7 @@
                                 value="{{ $pkl->alamat_pkl }}">
                         </div>
                         <div class="form-group">
-                            <label>Lokasi PKL</label>
+                            <label>Nomor Telephone</label>
                             <input type="text" name="lokasi_pkl" class="form-control" placeholder="Nomor Telephone"
                                 value="{{ $pkl->lokasi_pkl }}">
                         </div>

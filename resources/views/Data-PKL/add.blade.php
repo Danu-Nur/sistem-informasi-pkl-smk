@@ -17,7 +17,7 @@
                             <input type="text" name="alamat_pkl" class="form-control" placeholder="Alamat PKL">
                         </div>
                         <div class="form-group">
-                            <label>Lokasi PKL</label>
+                            <label>Nomor Telephone</label>
                             <input type="text" name="lokasi_pkl" class="form-control" placeholder="Nomor Telephone">
                         </div>
                         <div class="form-group">

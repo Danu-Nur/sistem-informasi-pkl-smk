@@ -14,7 +14,7 @@
                             <tr>
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
+                                <th>No Telephone</th>
                                 <th>Tanggal PKL</th>
                                 <th>Jam PKL</th>
                                 @if (in_array($userRole, ['ADMIN', 'SISWA']))
@@ -62,7 +62,7 @@
                             <tr>
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
+                                <th>No Telephone</th>
                                 <th>Tanggal PKL</th>
                                 <th>Jam PKL</th>
                                 <th>Tanggal Absen</th>

@@ -11,7 +11,7 @@
                             <tr>
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
+                                <th>No Telephone</th>
                                 <th>Tanggal PKL</th>
                                 <th>Jam PKL</th>
                                 <th>Tanggal Absen</th>
@@ -74,7 +74,7 @@
                             <tr>
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
+                                <th>No Telephone</th>
                                 <th>Tanggal PKL</th>
                                 <th>Jam PKL</th>
                                 <th>Dokumentasi</th>

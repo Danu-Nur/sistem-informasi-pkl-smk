@@ -14,7 +14,7 @@
                             <tr>
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
+                                <th>Nomor Telephone</th>
                                 <th>Siswa PKL</th>
                                 <th>Pembimbing Sekolah</th>
                                 <th>Pembimbing Industri</th>

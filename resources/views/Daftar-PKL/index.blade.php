@@ -63,8 +63,8 @@
                                     <option selected="selected">Choose...</option>
                                     <option value="TKJ">TKJ</option>
                                     <option value="TKR">TKR</option>
-                                    <option value="AKT">AKT</option>
-                                    <option value="MM">MM</option>
+                                    <option value="AKT">AKL</option>
+                                    <option value="MM">DKV</option>
                                 </select>
                             </div>
                             {{-- <div class="form-group">

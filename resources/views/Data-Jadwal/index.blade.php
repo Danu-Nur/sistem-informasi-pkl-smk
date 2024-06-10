@@ -16,7 +16,7 @@
                             <tr>
                                 <th>Nama PKL</th>
                                 <th>Alamat PKL</th>
-                                <th>Lokasi PKL</th>
+                                <th>No Telephone</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
                                 @if ($roleUser != 'SISWA')
