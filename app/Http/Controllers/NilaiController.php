@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kegiatan_Models;
 use App\Models\Penilaian_Models;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NilaiController extends Controller
 {
@@ -15,10 +16,29 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
-        $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
-        $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl'])->get();
-        return view('Data-Nilai.index', compact('data_kegiatan', 'data_nilai'));
+        $idUser = Auth::id();
+        $userRole = Auth::user()->role;
+        if ($userRole == 'ADMIN') {
+            $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
+            $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+            $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl'])->get();
+        } else {
+            $nilaiKegiatanIds = Penilaian_Models::whereHas('kegiatan', function ($query) use ($idUser) {
+                $query->whereHas('pkl', function ($query) use ($idUser) {
+                    $query->where('pindustri_id', $idUser);
+                });
+            })->pluck('kegiatan_id')->toArray();
+            $data_kegiatan = Kegiatan_Models::whereHas('pkl', function ($query) use ($idUser) {
+                $query->where('pindustri_id', $idUser);
+            })->with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+            $data_nilai = Penilaian_Models::whereHas('kegiatan', function ($query) use ($idUser) {
+                $query->whereHas('pkl', function ($query) use ($idUser) {
+                    $query->where('pindustri_id', $idUser);
+                });
+            })->with(['siswa', 'kegiatan.jadwal.pkl'])->get();
+        }
+
+        return view('Data-Nilai.index', compact('data_kegiatan', 'data_nilai', 'idUser', 'userRole'));
     }
 
     /**
@@ -39,6 +59,7 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
+        $roleUser = Auth::user()->role;
         $validateData = $request->validate([
             'siswa_id' => 'required',
             'kegiatan_id' => 'required',
@@ -50,20 +71,24 @@ class NilaiController extends Controller
         // dd($validateData);
 
         Penilaian_Models::create($validateData);
-
         toastr()->success('Save Nilai Successfully!');
-        return redirect()->route('admin.nilai.index');
+        if ($roleUser == 'ADMIN') {
+            return redirect()->route('admin.nilai.index');
+        } else {
+            return redirect()->route('pindustri.nilai.index');
+        }
     }
 
     /**
-     * Display the specified resource.
+     * D,
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Kegiatan_Models $nilai)
     {
-        return view('Data-Nilai.add', compact('nilai'));
+        $roleUser = Auth::user()->role;
+        return view('Data-Nilai.add', compact('nilai', 'roleUser'));
     }
 
     /**
@@ -74,8 +99,9 @@ class NilaiController extends Controller
      */
     public function edit(Penilaian_Models $nilai)
     {
+        $roleUser = Auth::user()->role;
         $nilai->load(['siswa', 'kegiatan.jadwal.pkl'])->get();
-        return view('Data-Nilai.edit', compact('nilai'));
+        return view('Data-Nilai.edit', compact('nilai', 'roleUser'));
     }
 
     /**
@@ -87,6 +113,7 @@ class NilaiController extends Controller
      */
     public function update(Request $request, Penilaian_Models $nilai)
     {
+        $roleUser = Auth::user()->role;
         $validateData = $request->validate([
             'siswa_id' => 'required',
             'kegiatan_id' => 'required',
@@ -100,7 +127,11 @@ class NilaiController extends Controller
         $nilai->update($validateData);
 
         toastr()->success('Update Nilai Successfully!');
-        return redirect()->route('admin.nilai.index');
+        if ($roleUser == 'ADMIN') {
+            return redirect()->route('admin.nilai.index');
+        } else {
+            return redirect()->route('pindustri.nilai.index');
+        }
     }
 
     /**

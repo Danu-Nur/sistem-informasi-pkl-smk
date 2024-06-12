@@ -48,25 +48,37 @@
             <div class="card-body">
                 <h4 class="card-title">Form Penilaian</h4>
                 <div class="basic-form">
-                    <form action="{{ route('admin.nilai.update',$nilai->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <input type="text" id="siswa_id" name="siswa_id" value="{{ $nilai->siswa_id }}">
-                        <input type="text" id="kegiatan_id" name="kegiatan_id" value="{{ $nilai->kegiatan->id }}">
-                        <div class="form-group">
-                            <label>Nilai PKL</label>
-                            <input type="text" name="nilai_pkl" class="form-control" placeholder="Nilai PKL" value="{{ $nilai->nilai_pkl }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Nilai Sikap</label>
-                            <input type="text" name="nilai_sikap" class="form-control" placeholder="Nilai Sikap" value="{{ $nilai->nilai_sikap }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan PKL">{{ $nilai->keterangan }}</textarea>
-                        </div>
+                    @if ($roleUser == 'ADMIN')
+                        <form action="{{ route('admin.nilai.update', $nilai->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                        @else
+                            <form action="{{ route('pindustri.nilai.update', $nilai->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                    @endif
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="siswa_id" name="siswa_id" value="{{ $nilai->siswa_id }}">
+                    <input type="hidden" id="kegiatan_id" name="kegiatan_id" value="{{ $nilai->kegiatan->id }}">
+                    <div class="form-group">
+                        <label>Nilai PKL</label>
+                        <input type="text" name="nilai_pkl" class="form-control" placeholder="Nilai PKL"
+                            value="{{ $nilai->nilai_pkl }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Nilai Sikap</label>
+                        <input type="text" name="nilai_sikap" class="form-control" placeholder="Nilai Sikap"
+                            value="{{ $nilai->nilai_sikap }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan PKL">{{ $nilai->keterangan }}</textarea>
+                    </div>
+                    @if ($roleUser == 'ADMIN')
                         <a href="{{ route('admin.nilai.index') }}" type="button" class="btn btn-primary">Back</a>
-                        <button type="submit" class="btn btn-success">Save</button>
+                    @else
+                        <a href="{{ route('pindustri.nilai.index') }}" type="button" class="btn btn-primary">Back</a>
+                    @endif
+                    <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>
             </div>

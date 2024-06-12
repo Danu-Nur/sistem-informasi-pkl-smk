@@ -95,7 +95,7 @@
                                         <td>
                                             <img src="{{ asset($data->dokumentasi) }}" height="100px" width="100px" alt="">
                                         </td>
-                                        <td>{{ $data->keterangan }}</td>
+                                        <td>{{ substr($data->keterangan, 0, 20) }}</td>
 
                                         {{-- <td>
                                             <a href="{{ route('admin.kegiatan.show', $data->id) }}" class="btn btn-info text-white"

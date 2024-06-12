@@ -30,15 +30,26 @@
                                         <td>{{ $data->jadwal->tanggal }}</td>
                                         <td>{{ $data->jadwal->jam }}</td>
                                         <td>
-                                            <img src="{{ asset($data->dokumentasi) }}" height="100px" width="100px" alt="">
+                                            <img src="{{ asset($data->dokumentasi) }}" height="100px" width="100px"
+                                                alt="">
                                         </td>
-                                        <td>{{ $data->keterangan }}</td>
+                                        <td>{{ substr($data->keterangan, 0, 20) }}</td>
 
                                         <td>
-                                            <a href="{{ route('admin.nilai.show', $data->id) }}" class="btn btn-info text-white"
-                                                data-toggle="tooltip" data-placement="top" title="Nilai PKL">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
+                                            @if ($userRole == 'ADMIN')
+                                                <a href="{{ route('admin.nilai.show', $data->id) }}"
+                                                    class="btn btn-info text-white" data-toggle="tooltip"
+                                                    data-placement="top" title="Nilai PKL">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('pindustri.nilai.show', $data->id) }}"
+                                                    class="btn btn-info text-white" data-toggle="tooltip"
+                                                    data-placement="top" title="Nilai PKL">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endif
+
                                             {{-- <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
                                                 data-placement="top" title="Delete"
                                                 onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $data->id }}').submit(); }">
@@ -99,21 +110,34 @@
                                         </td> --}}
 
                                         <td>
-                                            <a href="{{ route('admin.nilai.edit', $data->id) }}"
-                                                data-toggle="tooltip" data-placement="top" title="Edit Kegiatan">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
+                                            @if ($userRole == 'ADMIN')
+                                                <a href="{{ route('admin.nilai.edit', $data->id) }}" data-toggle="tooltip"
+                                                    data-placement="top" title="Edit Kegiatan">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('pindustri.nilai.edit', $data->id) }}"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit Kegiatan">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @endif
                                             <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
                                                 data-placement="top" title="Delete"
                                                 onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $data->id }}').submit(); }">
                                                 <i class="fa fa-trash color-danger"></i>
                                             </a>
 
-                                            <form id="delete-form-{{ $data->id }}"
-                                                action="{{ route('admin.nilai.destroy', $data->id) }}" method="POST"
-                                                style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
+                                            @if ($userRole == 'ADMIN')
+                                                <form id="delete-form-{{ $data->id }}"
+                                                    action="{{ route('admin.nilai.destroy', $data->id) }}" method="POST"
+                                                    style="display: none;">
+                                                @else
+                                                    <form id="delete-form-{{ $data->id }}"
+                                                        action="{{ route('pindustri.nilai.destroy', $data->id) }}"
+                                                        method="POST" style="display: none;">
+                                            @endif
+                                            @csrf
+                                            @method('DELETE')
                                             </form>
 
                                         </td>

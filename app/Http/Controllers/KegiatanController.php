@@ -70,8 +70,8 @@ class KegiatanController extends Controller
             'siswa_id' => 'required',
             'jadwal_id' => 'required',
             'absensi_id' => 'required',
-            'dokumentasi' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validating that it is an image
-            'keterangan' => 'sometimes|string|max:255',  // If 'keterangan' is optional
+            'dokumentasi' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validating that it is an image
+            'keterangan' => 'required|string',  // If 'keterangan' is optional
         ]);
 
         $validateData['dokumentasi'] = $this->uploadImage($request, 'dokumentasi', 'uploads/dokumentasi');
