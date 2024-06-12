@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="form-input-content">
-        <div class="card login-form mb-0">
+        <div class="card login-form mb-0" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;">
             <div class="card-body pt-5">
                 <a class="text-center" href="{{ route('login') }}">
                     <h4>LOGIN PKL</h4>
