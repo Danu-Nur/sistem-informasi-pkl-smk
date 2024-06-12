@@ -113,22 +113,26 @@ class AbsensiController extends Controller
 
         $tanggal = $request->tanggal;
         $jam = $request->jam;
+        $jadwal = $tanggal . ' ' . $jam;
 
         $statusAbsen = 'Tepat Waktu';
         $tanggalabsen = date('Y-m-d');
         $waktuabsen =  date('H:i:s');
-
-        if ($tanggalabsen > $tanggal && $waktuabsen > $jam) {
+        $absen_sekarang = $tanggalabsen . ' ' . $waktuabsen;
+        if ($absen_sekarang > $jadwal) {
             $statusAbsen = 'Terlambat';
         }
+        // if ($tanggalabsen > $tanggal && $waktuabsen > $jam) {
+        //     $statusAbsen = 'Terlambat';
+        // }
 
-        if ($tanggalabsen < $tanggal && $waktuabsen > $jam) {
-            $statusAbsen = 'Terlambat';
-        }
+        // if ($tanggalabsen < $tanggal && $waktuabsen > $jam) {
+        //     $statusAbsen = 'Terlambat';
+        // }
 
-        if ($tanggalabsen > $tanggal && $waktuabsen < $jam) {
-            $statusAbsen = 'Terlambat';
-        }
+        // if ($tanggalabsen > $tanggal && $waktuabsen < $jam) {
+        //     $statusAbsen = 'Terlambat';
+        // }
 
         $validateData['tanggal_absen'] = $tanggalabsen;
         $validateData['waktu_absen'] = $waktuabsen;
