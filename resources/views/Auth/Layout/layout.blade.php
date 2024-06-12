@@ -18,6 +18,13 @@
             background-repeat: no-repeat;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
+        }
+
+        .containers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
     </style>
 
@@ -40,7 +47,12 @@
         Preloader end
     ********************-->
 
+
     <div class="login-form-bg h-100">
+        <div class="containers" style="margin-top: 5%;">
+            <h1 style="font-size: 50px;text-align: center;">SISTEM INFORMASI PRAKTIK KERJA
+                LAPANGAN SMK WIJAYA PUTRA</h1>
+        </div>
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">

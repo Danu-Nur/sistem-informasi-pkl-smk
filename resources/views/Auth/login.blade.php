@@ -1,25 +1,20 @@
 @extends('Auth.Layout.layout')
 
 @section('content')
-    <div class="form-input-content">
-        <div class="card login-form mb-0" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);
+    <div class="form-input-content" style="height: 75%">
+        <div class="card login-form mb-0"
+            style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease-in-out;">
             <div class="card-body pt-5">
+
+
+
+                <div class="containers mb-4">
+                    <img src="{{ asset('logo/logo-smk.png') }}" width="20%" alt="">
+                </div>
                 <a class="text-center" href="{{ route('login') }}">
                     <h4>LOGIN PKL</h4>
                 </a>
-                <style>
-                    .containers {
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: center;
-                    }
-                </style>
-
-                <div class="containers">
-                    <img src="{{ asset('logo/logo-smk.png') }}" width="50%" alt="">
-                </div>
-
                 <form class="mt-5 mb-5 login-input" action="{{ route('login.post') }}" method="POST">
                     @csrf
                     <div class="form-group">
