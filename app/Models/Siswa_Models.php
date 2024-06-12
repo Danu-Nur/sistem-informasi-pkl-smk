@@ -23,6 +23,11 @@ class Siswa_Models extends Model
         'password',
     ];
 
+    public function pkl()
+    {
+        return $this->hasOne(PKL_Models::class, 'siswa_id');
+    }
+
     public function pkls()
     {
         return $this->hasMany(PKL_Models::class);

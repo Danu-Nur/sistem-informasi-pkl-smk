@@ -23,9 +23,26 @@ class LaporanController extends Controller
         $idUser = Auth::id();
         $roleUser = Auth::user()->role;
         if ($roleUser == 'ADMIN') {
-            $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
-            $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
-            $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+            // $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
+            // $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+            // $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+            $dataSiswaPkl = Siswa_Models::whereHas('pkl')->get();
+            return view('Data-Laporan.index',compact('dataSiswaPkl','roleUser'));
+
+        } elseif ($roleUser == "PEMBIMBING INDUSTRI") {
+            $nilaiKegiatanIds = Penilaian_Models::whereHas('kegiatan', function ($query) use ($idUser) {
+                $query->whereHas('pkl', function ($query) use ($idUser){
+                    $query->where('pindustri_id',$idUser);
+                });
+            })->pluck('kegiatan_id')->toArray();
+
+            $data_kegiatan = Kegiatan_Models::whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            })->with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+
+            $data_nilai = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
+                $query->where('user_id', $idUser);
+            })->with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
         } else {
             $nilaiKegiatanIds = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
                 $query->where('user_id', $idUser);
@@ -38,8 +55,8 @@ class LaporanController extends Controller
             $data_nilai = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
                 $query->where('user_id', $idUser);
             })->with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+            return view('Data-laporan.index', compact('data_kegiatan', 'data_nilai', 'idUser', 'roleUser'));
         }
-        return view('Data-laporan.index', compact('data_kegiatan', 'data_nilai', 'idUser', 'roleUser'));
     }
 
     /**
