@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
+{{-- @dump($data_absensi) --}}
                             @if ($data_absensi)
                                 @foreach ($data_absensi as $data)
                                     <tr>

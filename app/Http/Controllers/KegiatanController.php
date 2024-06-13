@@ -30,18 +30,22 @@ class KegiatanController extends Controller
 
         if ($roleUser == 'ADMIN') {
             $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->get();
+            $data_absensi = Absensi_Models::with(['pkl', 'jadwal'])
+                ->whereNotIn('id', $kegiatanAbsensiIds)
+                ->get();
         } else {
 
             $data_kegiatan = $queryKegiatanModel->with(['siswa', 'pkl', 'jadwal', 'absensi'])->get();
+            $data_absensi = Absensi_Models::whereHas('pkl', function ($query) use ($idUser) {
+                $query->whereHas('siswa', function ($query) use ($idUser) {
+                    $query->where('user_id', $idUser);
+                });
+            })->with(['pkl', 'jadwal'])
+                ->whereNotIn('id', $kegiatanAbsensiIds)
+                ->get();
         }
 
-        $data_absensi = Absensi_Models::whereHas('pkl', function ($query) use ($idUser) {
-            $query->whereHas('siswa', function ($query) use ($idUser) {
-                $query->where('user_id', $idUser);
-            });
-        })->with(['pkl', 'jadwal'])
-            ->whereNotIn('id', $kegiatanAbsensiIds)
-            ->get();
+
 
         return view('Data-Kegiatan.index', compact('roleUser', 'data_absensi', 'data_kegiatan'));
     }
