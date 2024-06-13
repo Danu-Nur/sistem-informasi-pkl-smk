@@ -10,14 +10,25 @@
         }
     </style>
     {{-- @dump(count($data_nilai) > 0 ? $data_nilai : 'kosong') --}}
+    {{-- @dump($roleUser) --}}
     @if (count($data_nilai) > 0)
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ ($roleUser == 'ADMIN' ? route('admin.laporan.edit', $idUser) : $roleUser == 'SISWA') ? route('siswa.laporan.create') : route('pindustri.laporan.edit', $idUser) }}"
-                        class="btn mb-3 btn-outline-primary">
-                        Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
-                    </a>
+                    @if ($roleUser == 'ADMIN')
+                        <a href="{{ route('admin.laporan.edit', $idUser) }}" class="btn mb-3 btn-outline-primary">
+                            Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
+                        </a>
+                    @elseif($roleUser == 'SISWA')
+                        <a href="{{ route('siswa.laporan.create') }}" class="btn mb-3 btn-outline-primary">
+                            Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
+                        </a>
+                    @else
+                        <a href="{{ route('pindustri.laporan.edit', $idUser) }}" class="btn mb-3 btn-outline-primary">
+                            Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
+                        </a>
+                    @endif
+
                     <h4 class="card-title">Data PKL Sudah di Nilai</h4>
                     <div class="table-responsive">
                         <table id="dataTable" class="table table-striped table-bordered zero-configuration">
