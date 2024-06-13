@@ -29,6 +29,7 @@
         }
 
         table {
+            table-layout:fixed;
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
@@ -40,7 +41,7 @@
             padding: 8px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            /* white-space: nowrap; */
         }
 
         img {
@@ -150,7 +151,7 @@
                                 <img src="{{ public_path($data['kegiatan']['dokumentasi']) }}" width="100px"
                                     alt="">
                             </td>
-                            <td style="text-align: left;">
+                            <td style="text-align: left; word-break: break-word;">
                                 <p>Jadwal:
                                     {{ $data['kegiatan']['jadwal']['tanggal'] . ' ' . $data['kegiatan']['jadwal']['jam'] }}
                                 </p>

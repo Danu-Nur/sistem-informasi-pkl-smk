@@ -6,40 +6,41 @@
             max-width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            /* white-space: nowrap; */
         }
     </style>
+    {{-- @dump(count($data_nilai) > 0 ? $data_nilai : 'kosong') --}}
+    @if (count($data_nilai) > 0)
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ ($roleUser == 'ADMIN' ? route('admin.laporan.edit', $idUser) : $roleUser == 'SISWA') ? route('siswa.laporan.create') : route('pindustri.laporan.edit', $idUser) }}"
+                        class="btn mb-3 btn-outline-primary">
+                        Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
+                    </a>
+                    <h4 class="card-title">Data PKL Sudah di Nilai</h4>
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-striped table-bordered zero-configuration">
+                            <thead>
+                                <tr>
+                                    <th>Nama Siswa</th>
+                                    <th>Nama PKL</th>
+                                    <th>Tanggal PKL</th>
+                                    <th>Jam PKL</th>
+                                    <th>Tanggal Absen</th>
+                                    <th>Jam Absen</th>
+                                    <th>Status Absen</th>
+                                    <th>Foto Kegiatan</th>
+                                    <th>Keterangan Kegiatan</th>
+                                    <th>Nilai PKL</th>
+                                    <th>Nilai Sikap</th>
+                                    <th>Keterangan</th>
+                                    {{-- <th>Opsi</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
 
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <a href="{{ $roleUser == 'ADMIN' ? route('admin.laporan.create') : route('siswa.laporan.create') }}"
-                    class="btn mb-3 btn-outline-primary">
-                    Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
-                </a>
-                <h4 class="card-title">Data PKL Sudah di Nilai</h4>
-                <div class="table-responsive">
-                    <table id="dataTable" class="table table-striped table-bordered zero-configuration">
-                        <thead>
-                            <tr>
-                                <th>Nama Siswa</th>
-                                <th>Nama PKL</th>
-                                <th>Tanggal PKL</th>
-                                <th>Jam PKL</th>
-                                <th>Tanggal Absen</th>
-                                <th>Jam Absen</th>
-                                <th>Status Absen</th>
-                                <th>Foto Kegiatan</th>
-                                <th>Keterangan Kegiatan</th>
-                                <th>Nilai PKL</th>
-                                <th>Nilai Sikap</th>
-                                <th>Keterangan</th>
-                                {{-- <th>Opsi</th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            @if ($data_nilai)
                                 @foreach ($data_nilai as $data)
                                     <tr>
                                         <td>{{ $data->siswa->nama_siswa }}</td>
@@ -79,12 +80,28 @@
                                     </td> --}}
                                     </tr>
                                 @endforeach
-                            @endif
 
-                        </tbody>
-                    </table>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row" style="display: flex; flex-wrap:wrap; justify-content:center;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <span class="display-5"><i class="icon-close gradient-1-text"></i></span>
+                            <h2 class="mt-3">Kegitan Belum Dinilai</h2>
+                            <p>Harap Menghubungi Pembimbing untuk Menilai Kegiatan</p>
+                            {{-- <a href="javascript:void()" class="btn gradient-3 btn-lg border-0 btn-rounded px-5">Download now</a> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
