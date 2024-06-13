@@ -22,7 +22,6 @@
                         <div class="form-group">
                             <label>Role</label>
                             <select id="inputState" name="role" class="form-control">
-                                <option value="SUPER" selected="selected">Super Admin</option>
                                 <option value="ADMIN">Admin</option>
                                 <option value="PEMBIMBING SEKOLAH">Pembimbing Sekolah</option>
                                 <option value="PEMBIMBING INDUSTRI">Pembimbing Industri</option>

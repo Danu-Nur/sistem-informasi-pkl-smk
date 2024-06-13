@@ -78,6 +78,7 @@ Route::group(['middleware' => ['pindustri'], 'prefix' => 'pindustri', 'as' => 'p
     Route::put('profile/update/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('absensi', AbsensiController::class);
     Route::resource('nilai', NilaiController::class);
+    Route::resource('laporan', LaporanController::class);
 });
 // END ROUTE PEMBIMBING INDUSTRI
 
