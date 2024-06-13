@@ -66,6 +66,13 @@ class LaporanController extends Controller
         $data_nilai = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
             $query->where('user_id', $idUser);
         })->with(['siswa', 'kegiatan.jadwal.pkl', 'kegiatan.absensi'])->get();
+        // Convert the collection to array
+        $data_siswa->toArray();
+        $data_nilai->toArray();
+
+        // Pass the data array to the view
+        $pdf = PDF::loadView('Data-Laporan.print', compact('data_nilai', 'data_siswa'));
+        return $pdf->download('laporan.pdf');
     }
 
     /**
