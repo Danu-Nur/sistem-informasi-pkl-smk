@@ -63,9 +63,9 @@
                                 </option>
                                 <option value="TKR" {{ $siswa->jurusan == 'TKR' ? 'selected="selected"' : '' }}>TKR
                                 </option>
-                                <option value="AKT" {{ $siswa->jurusan == 'AKL' ? 'selected="selected"' : '' }}>AKL
+                                <option value="AKL" {{ $siswa->jurusan == 'AKL' ? 'selected="selected"' : '' }}>AKL
                                 </option>
-                                <option value="MM" {{ $siswa->jurusan == 'DKV' ? 'selected="selected"' : '' }}>DKV
+                                <option value="DKV" {{ $siswa->jurusan == 'DKV' ? 'selected="selected"' : '' }}>DKV
                                 </option>
                             </select>
                         </div>
