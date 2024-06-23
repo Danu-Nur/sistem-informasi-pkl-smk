@@ -23,6 +23,10 @@
                         <a href="{{ route('siswa.laporan.create') }}" class="btn mb-3 btn-outline-primary">
                             Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
                         </a>
+                    @elseif($roleUser == 'PEMBIMBING SEKOLAH')
+                        <a href="{{ route('psekolah.laporan.edit', $idUser) }}" class="btn mb-3 btn-outline-primary">
+                            Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
+                        </a>
                     @else
                         <a href="{{ route('pindustri.laporan.edit', $idUser) }}" class="btn mb-3 btn-outline-primary">
                             Print Laporan <span class="btn-icon-right"><i class="fa fa-print"></i></span>
@@ -40,6 +44,7 @@
                                     <th>Jam PKL</th>
                                     <th>Tanggal Absen</th>
                                     <th>Jam Absen</th>
+                                    <th>Lokasi Absen</th>
                                     <th>Status Absen</th>
                                     <th>Foto Kegiatan</th>
                                     <th>Keterangan Kegiatan</th>
@@ -60,6 +65,7 @@
                                         <td>{{ $data->kegiatan->jadwal->jam }}</td>
                                         <td>{{ $data->kegiatan->absensi->tanggal_absen }}</td>
                                         <td>{{ $data->kegiatan->absensi->waktu_absen }}</td>
+                                        <td>{{ $data->kegiatan->absensi->lokasi_absen }}</td>
                                         <td>{{ $data->kegiatan->absensi->status_absen }}</td>
                                         <td>
                                             <img src="{{ asset($data->kegiatan->dokumentasi) }}" height="100px"

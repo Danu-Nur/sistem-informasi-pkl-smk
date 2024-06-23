@@ -160,6 +160,10 @@
                                     {{ $data['kegiatan']['absensi']['tanggal_absen'] . ' ' . $data['kegiatan']['absensi']['waktu_absen'] . ' (' . $data['kegiatan']['absensi']['status_absen'] . ')' }}
                                 </p>
                                 <hr>
+                                <p>Lokasi Absen :
+                                    {{ $data['kegiatan']['absensi']['lokasi_absen'] }}
+                                </p>
+                                <hr>
                                 <p>Kegiatan : {{ $data['kegiatan']['keterangan'] }}</p>
                                 <hr>
                                 <p>Nilai PKL: {{ $data['nilai_pkl'] }}</p>

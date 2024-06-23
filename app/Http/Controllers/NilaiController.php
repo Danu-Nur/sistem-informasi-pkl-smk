@@ -22,7 +22,22 @@ class NilaiController extends Controller
             $nilaiKegiatanIds = Penilaian_Models::pluck('kegiatan_id')->toArray();
             $data_kegiatan = Kegiatan_Models::with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
             $data_nilai = Penilaian_Models::with(['siswa', 'kegiatan.jadwal.pkl'])->get();
-        } else {
+        } elseif ($userRole == 'PEMBIMBING SEKOLAH'){
+            $nilaiKegiatanIds = Penilaian_Models::whereHas('kegiatan', function ($query) use ($idUser) {
+                $query->whereHas('pkl', function ($query) use ($idUser) {
+                    $query->where('psekolah_id', $idUser);
+                });
+            })->pluck('kegiatan_id')->toArray();
+            $data_kegiatan = Kegiatan_Models::whereHas('pkl', function ($query) use ($idUser) {
+                $query->where('psekolah_id', $idUser);
+            })->with(['siswa', 'pkl', 'jadwal', 'absensi'])->whereNotIn('id', $nilaiKegiatanIds)->get();
+            $data_nilai = Penilaian_Models::whereHas('kegiatan', function ($query) use ($idUser) {
+                $query->whereHas('pkl', function ($query) use ($idUser) {
+                    $query->where('psekolah_id', $idUser);
+                });
+            })->with(['siswa', 'kegiatan.jadwal.pkl'])->get();
+        }
+        else {
             $nilaiKegiatanIds = Penilaian_Models::whereHas('kegiatan', function ($query) use ($idUser) {
                 $query->whereHas('pkl', function ($query) use ($idUser) {
                     $query->where('pindustri_id', $idUser);

@@ -45,6 +45,11 @@
                                                     data-toggle="tooltip" data-placement="top" title="Lihat Laporan">
                                                     <i class="fa fa-file"></i>
                                                 </a>
+                                            @elseif ($roleUser == 'PEMBIMBING SEKOLAH')
+                                                <a href="{{ route('psekolah.laporan.show', $data->user_id) }}"
+                                                    data-toggle="tooltip" data-placement="top" title="Lihat Laporan">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
                                             @else
                                                 <a href="{{ route('pindustri.laporan.show', $data->user_id) }}"
                                                     data-toggle="tooltip" data-placement="top" title="Lihat Laporan">

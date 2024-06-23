@@ -67,6 +67,7 @@
                                 <th>Jam PKL</th>
                                 <th>Tanggal Absen</th>
                                 <th>Jam Absen</th>
+                                <th>Lokasi Absen</th>
                                 <th>Status</th>
                                 {{-- <th>Opsi</th> --}}
                             </tr>
@@ -83,6 +84,7 @@
                                         <td>{{ $data->jadwal->jam }}</td>
                                         <td>{{ $data->tanggal_absen }}</td>
                                         <td>{{ $data->waktu_absen }}</td>
+                                        <td>{{ $data->lokasi_absen }}</td>
                                         <td>{{ $data->status_absen }}</td>
 
                                         {{-- <td>

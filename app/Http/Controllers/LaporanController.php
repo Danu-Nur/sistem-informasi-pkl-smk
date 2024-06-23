@@ -36,6 +36,11 @@ class LaporanController extends Controller
                 $query->where('pindustri_id', $idUser);
             })->get();
             return view('Data-Laporan.index', compact('dataSiswaPkl', 'roleUser'));
+        } elseif ($roleUser == "PEMBIMBING SEKOLAH") {
+            $dataSiswaPkl = Siswa_Models::whereHas('pkl', function ($query) use ($idUser) {
+                $query->where('psekolah_id', $idUser);
+            })->get();
+            return view('Data-Laporan.index', compact('dataSiswaPkl', 'roleUser'));
         } else {
             $nilaiKegiatanIds = Penilaian_Models::whereHas('siswa', function ($query) use ($idUser) {
                 $query->where('user_id', $idUser);

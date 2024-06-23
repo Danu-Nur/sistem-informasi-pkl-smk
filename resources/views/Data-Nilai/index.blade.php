@@ -16,7 +16,9 @@
                                 <th>Jam PKL</th>
                                 <th>Dokumentasi</th>
                                 <th>Keterangan</th>
-                                <th>Opsi</th>
+                                @if ($userRole != 'PEMBIMBING SEKOLAH')
+                                    <th>Opsi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +44,7 @@
                                                     data-placement="top" title="Nilai PKL">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                            @else
+                                            @elseif ($userRole == 'PEMBIMBING INDUSTRI')
                                                 <a href="{{ route('pindustri.nilai.show', $data->id) }}"
                                                     class="btn btn-info text-white" data-toggle="tooltip"
                                                     data-placement="top" title="Nilai PKL">
@@ -90,7 +92,9 @@
                                 <th>Nilai PKL</th>
                                 <th>Nilai Sikap</th>
                                 <th>Keterangan</th>
-                                <th>Opsi</th>
+                                @if ($userRole != 'PEMBIMBING SEKOLAH')
+                                    <th>Opsi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -115,23 +119,26 @@
                                                     data-placement="top" title="Edit Kegiatan">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                            @else
+                                            @elseif($userRole == 'PEMBIMBING INDUSTRI')
                                                 <a href="{{ route('pindustri.nilai.edit', $data->id) }}"
                                                     data-toggle="tooltip" data-placement="top" title="Edit Kegiatan">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
                                             @endif
-                                            <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
-                                                data-placement="top" title="Delete"
-                                                onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $data->id }}').submit(); }">
-                                                <i class="fa fa-trash color-danger"></i>
-                                            </a>
+                                            @if ($userRole != 'PEMBIMBING SEKOLAH')
+                                                <a href="#" class="ml-3 text-danger" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{ $data->id }}').submit(); }">
+                                                    <i class="fa fa-trash color-danger"></i>
+                                                </a>
+                                            @endif
+
 
                                             @if ($userRole == 'ADMIN')
                                                 <form id="delete-form-{{ $data->id }}"
                                                     action="{{ route('admin.nilai.destroy', $data->id) }}" method="POST"
                                                     style="display: none;">
-                                                @else
+                                                @elseif($userRole == 'PEMBIMBING INDUSTRI')
                                                     <form id="delete-form-{{ $data->id }}"
                                                         action="{{ route('pindustri.nilai.destroy', $data->id) }}"
                                                         method="POST" style="display: none;">

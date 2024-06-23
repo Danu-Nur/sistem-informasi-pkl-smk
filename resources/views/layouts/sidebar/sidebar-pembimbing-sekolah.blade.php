@@ -38,7 +38,11 @@
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Penilaian</span>
                 </a>
             </li>
-
+            <li>
+                <a class="has-arrow" href="{{ route('psekolah.laporan.index') }}" aria-expanded="false">
+                    <i class="icon-chart menu-icon"></i><span class="nav-text">Laporan</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
