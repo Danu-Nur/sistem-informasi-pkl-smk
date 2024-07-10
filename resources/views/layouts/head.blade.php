@@ -21,3 +21,36 @@
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 <!-- Toast Tr -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<style>
+    .nk-sidebar,
+    .nk-sidebar ul {
+        background-color: rgb(70, 70, 70) !important;
+
+    }
+
+    .nk-sidebar .metismenu>li.active>a {
+        background: #afafaf;
+        color: white;
+    }
+
+    .nk-sidebar .metismenu a:hover,
+    .nk-sidebar .metismenu a:active,
+    .nk-sidebar .metismenu a.active {
+        text-decoration: none;
+        background-color: #d2d2d2;
+    }
+
+    [data-sibebarbg="color_1"] .nk-sidebar .metismenu>li ul a {
+        color: #909297;
+    }
+
+    .nk-sidebar .metismenu a {
+        color: #b2b2b2;
+        background-color: rgb(35, 35, 35);
+    }
+
+    [data-headerbg="color_1"] .header {
+        background-color: #bb0505;
+    }
+</style>
